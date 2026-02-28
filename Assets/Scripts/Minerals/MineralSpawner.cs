@@ -8,9 +8,9 @@ public class MineralSpawner : MonoBehaviour
     {
         GameObject nObject = Instantiate(mineralPrefab);
         nObject.transform.position = position;
-
         Mineral nMineral = nObject.GetComponent<Mineral>();
-        //TODO: initialize stuff
+        Debug.Log(data);
+        nMineral.Initialize(data);
         return nObject;
     }
 }
