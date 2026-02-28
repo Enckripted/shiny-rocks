@@ -4,10 +4,14 @@ using UnityEngine;
 public class MineralSpawnManager : MonoBehaviour
 {
     [SerializeField] private MineralSpawner spawner;
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private float spawnInterval = 2f;
+    private Vector2 ySpawnRange = new(-2,4);
 
     private MineralData[] allMineralData;
     private Camera mainCam;
+
+    private bool isSpawning = false;
 
     private void LoadAllMineralData()
     {
@@ -24,11 +28,11 @@ public class MineralSpawnManager : MonoBehaviour
         // choose a random mineral type
         var data = allMineralData[Random.Range(0, allMineralData.Length)];
 
-        // determine world position at left edge; randomised vertically between top/bottom
-        float y = mainCam.ViewportToWorldPoint(new Vector3(0f, Random.value, mainCam.nearClipPlane)).y;
-        float x = mainCam.ViewportToWorldPoint(new Vector3(0f, 0f, mainCam.nearClipPlane)).x;
-        Vector3 spawnPos = new Vector3(x, y, 0f);
-
+        // determine right end of camera position; choose random Y within range
+        float x = Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect);
+        float y = Random.Range(ySpawnRange.x, ySpawnRange.y);
+        //slight offset to x to ensure they spawn off camera
+        Vector3 spawnPos = new(x+3, y, 0f);
         spawner.SpawnMineral(data, spawnPos);
     }
 
@@ -40,8 +44,31 @@ public class MineralSpawnManager : MonoBehaviour
 
     void Start()
     {
-        // start the repeating spawn loop
-        StartCoroutine(SpawnLoop());
+        //this doesn't work in Awake()
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+    }
+
+    void Update()
+    {
+        //ensures that coroutine will not start again once started
+        //and will not stop again once stopped
+        if (gameManager.inRun)
+        {
+            if(isSpawning == false)
+            {
+                // start the repeating spawn loop
+                StartCoroutine(SpawnLoop());
+                isSpawning = true;   
+            }
+        }
+        else
+        {
+            if(isSpawning == true)
+            {    
+                StopCoroutine(SpawnLoop());
+                isSpawning = false;
+            }
+        }
     }
 
     private IEnumerator SpawnLoop()

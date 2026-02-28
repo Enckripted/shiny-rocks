@@ -6,6 +6,8 @@ TagManager:
   tags:
   - MidRunUI
   - PreRunUI
+  - GameManager
+  - Drill
   layers:
   - Default
   - TransparentFX
