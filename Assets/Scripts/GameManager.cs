@@ -1,13 +1,23 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
     public double Money { get; private set; }
     public SerializedDictionary<string, int> MineralInventory { get; private set; }
 
+    //canvas groups
+    private CanvasGroup preRunUI;
+    private CanvasGroup midRunUI;
+
     void Awake()
     {
+        preRunUI = GameObject.FindGameObjectWithTag("PreRunUI").GetComponent<CanvasGroup>();
+        midRunUI = GameObject.FindGameObjectWithTag("MidRunUI").GetComponent<CanvasGroup>();
+        
+        ShowHomeUI();
         Money = 0;
         MineralInventory = new SerializedDictionary<string, int>();
     }
@@ -41,4 +51,34 @@ public class GameManager : MonoBehaviour
 
         return true;
     }
+
+
+    public void ShowHomeUI()
+    {
+
+        //show home ui, hide mid-run ui
+        preRunUI.alpha = 1;
+        preRunUI.interactable = true;
+        preRunUI.blocksRaycasts = true;
+
+        midRunUI.alpha = 0;
+        midRunUI.interactable = false;
+        midRunUI.blocksRaycasts = false;
+
+    }
+
+    public void ShowMidRunUI()
+    {
+
+        //show mid-run ui, hide home ui
+        midRunUI.alpha = 1;
+        midRunUI.interactable = true;
+        midRunUI.blocksRaycasts = true;
+
+        preRunUI.alpha = 0;
+        preRunUI.interactable = false;
+        preRunUI.blocksRaycasts = false;
+
+    }
+
 }
