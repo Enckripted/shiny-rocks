@@ -23,7 +23,7 @@ public abstract class Damagable : MonoBehaviour
         UpdateHealthbar();
     }
 
-    void DealDamage(float damage)
+    public void DealDamage(float damage)
     {
         Health = Math.Max(Health - damage, 0);
         UpdateHealthbar();
