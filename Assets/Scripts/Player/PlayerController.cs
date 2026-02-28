@@ -1,18 +1,25 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Damagable
 {
     public float DrillSpeed;
+    public int InitialHealth;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void EndRun()
     {
-
+        //TODO: end run
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnRunBegin()
     {
+        Health = InitialHealth;
+        MaxHealth = InitialHealth;
+        UpdateHealthbar();
+    }
 
+    void Start()
+    {
+        OnDeathEvent.AddListener(EndRun);
+        OnRunBegin();
     }
 }

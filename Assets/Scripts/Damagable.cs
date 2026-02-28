@@ -11,7 +11,7 @@ public abstract class Damagable : MonoBehaviour
 
     public UnityEvent OnDeathEvent;
 
-    void UpdateHealthbar()
+    public void UpdateHealthbar()
     {
         healthbar.Health = Health;
         healthbar.MaxHealth = MaxHealth;
