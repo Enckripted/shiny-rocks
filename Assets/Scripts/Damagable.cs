@@ -6,8 +6,8 @@ public abstract class Damagable : MonoBehaviour
 {
     [SerializeField] private HealthBar healthbar;
 
-    public abstract float MaxHealth { get; protected set; }
-    public float Health;
+    public abstract float MaxHealth { get; set; }
+    public float Health { get; set; }
 
     public UnityEvent OnDeathEvent;
 
