@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     //canvas groups
     private CanvasGroup preRunUI;
     private CanvasGroup midRunUI;
+    public bool inRun = false;
 
     void Awake()
     {
@@ -67,7 +68,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void ShowMidRunUI()
+    public void StartRun()
     {
 
         //show mid-run ui, hide home ui
@@ -78,6 +79,8 @@ public class GameManager : MonoBehaviour
         preRunUI.alpha = 0;
         preRunUI.interactable = false;
         preRunUI.blocksRaycasts = false;
+
+        inRun = true;
 
     }
 

@@ -4,11 +4,14 @@ using UnityEngine;
 public class MineralSpawnManager : MonoBehaviour
 {
     [SerializeField] private MineralSpawner spawner;
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private float spawnInterval = 2f;
     private Vector2 ySpawnRange = new(-2,4);
 
     private MineralData[] allMineralData;
     private Camera mainCam;
+
+    private bool isSpawning = false;
 
     private void LoadAllMineralData()
     {
@@ -41,8 +44,31 @@ public class MineralSpawnManager : MonoBehaviour
 
     void Start()
     {
-        // start the repeating spawn loop
-        StartCoroutine(SpawnLoop());
+        //this doesn't work in Awake()
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+    }
+
+    void Update()
+    {
+        //ensures that coroutine will not start again once started
+        //and will not stop again once stopped
+        if (gameManager.inRun)
+        {
+            if(isSpawning == false)
+            {
+                // start the repeating spawn loop
+                StartCoroutine(SpawnLoop());
+                isSpawning = true;   
+            }
+        }
+        else
+        {
+            if(isSpawning == true)
+            {    
+                StopCoroutine(SpawnLoop());
+                isSpawning = false;
+            }
+        }
     }
 
     private IEnumerator SpawnLoop()
