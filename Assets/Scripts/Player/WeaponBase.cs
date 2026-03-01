@@ -17,6 +17,8 @@ public class WeaponBase : MonoBehaviour
     [SerializeField] private Sprite weaponReady;
     [SerializeField] private Sprite weaponOnCooldown;
 
+    [SerializeField] private Vector3 rotateOffset;
+
     void Awake()
     {
         fireEffect = transform.Find("FireEffect").gameObject;
@@ -36,17 +38,37 @@ public class WeaponBase : MonoBehaviour
         }
 
         mousePos = Mouse.current.position.ReadValue();
-        if (Mouse.current.leftButton.wasPressedThisFrame && weaponCooldownTimer <= 0)
-        {
-            CircleCast();
-            StartCoroutine(PlayFireEffect());
-        }
         // Convert mouse position to world position
         worldMousePos = Camera.main.ScreenToWorldPoint(new Vector3(
             mousePos.x,
             mousePos.y,
             Camera.main.nearClipPlane
         ));
+
+        //rotate weapon to face mouse pointer
+        Vector2 direction = worldMousePos - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Debug.Log("horizontal: " + direction.x + " vertical: " + direction.y);
+        
+
+        // Sprite points left, so offset by 180
+        angle += 180f;
+        
+
+        // Clamp the angle relative to sprite’s left direction
+        float clampedAngle = angle;//Mathf.Clamp(angle-90, 90f, 270f);
+        if(angle < 270 && angle > 180) clampedAngle = 270;
+        else if(angle > 90 && angle < 180) clampedAngle = 90;
+        Debug.Log(angle);
+        transform.rotation = Quaternion.Euler(0f, 0f, clampedAngle);
+
+        if (Mouse.current.leftButton.wasPressedThisFrame && weaponCooldownTimer <= 0)
+        {
+            CircleCast();
+            StartCoroutine(PlayFireEffect());
+        }
+        
+        
         worldMousePos.z = 0f;
 
         //set crosshair position
