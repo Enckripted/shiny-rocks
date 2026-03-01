@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MineralData
   Name: Copper
   SellValue: 5
-  MinimumDepth: 1
+  MinimumDepth: 0
   MaxHealth: 1
   Color: {r: 0.8113208, g: 0.55755764, b: 0.24110004, a: 1}
   Sprite: {fileID: 0}

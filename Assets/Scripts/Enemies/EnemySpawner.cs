@@ -7,7 +7,6 @@ public class EnemySpawner : MonoBehaviour
 
     public GameObject SpawnEnemy(EnemyData data, Vector3 position, Vector3 target)
     {
-        //Debug.Log(target);
         GameObject nObject = Instantiate(enemyPrefab);
         nObject.transform.position = position;
         Enemy enemy = nObject.GetComponent<Enemy>();

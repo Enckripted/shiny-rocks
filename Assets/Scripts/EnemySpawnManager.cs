@@ -41,8 +41,6 @@ public class EnemySpawnManager : MonoBehaviour
     {
         EnemyData enemyData = GetRandomEnemyData();
         Vector3 lanePosition = lanePositions[lane];
-        //Debug.Log(lane);
-        //Debug.Log(lanePosition);
         float leftXPosition = mainCamera.transform.position.x - (mainCamera.aspect * mainCamera.orthographicSize);
         enemySpawner.SpawnEnemy(enemyData, new(leftXPosition, lanePosition.y, lanePosition.z), lanePosition);
     }

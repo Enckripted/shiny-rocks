@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +11,10 @@ public class GameManager : MonoBehaviour
 
     public double Money { get; private set; }
     private SerializedDictionary<string, int> MineralInventory { get; set; }
+
+    //events
+    public UnityEvent runStartEvent = new UnityEvent();
+    public UnityEvent runStopEvent = new UnityEvent();
 
     //canvas groups
     private CanvasGroup preRunUI;
@@ -88,12 +94,14 @@ public class GameManager : MonoBehaviour
     {
         ShowRunUI();
         inRun = true;
+        runStartEvent.Invoke();
     }
 
     //we want to stop the game loop to show the game over screen and cash out
     public void StopRun()
     {
         inRun = false;
+        runStopEvent.Invoke();
     }
 
     //and then through clicking cash out we end the run
