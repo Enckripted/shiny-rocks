@@ -14,7 +14,6 @@ public class Mineral : Damagable
     [SerializeField] private ParticleSystem hitEffect;
 
     private bool hasCollidedWithDrill;
-    private bool isRemoveRunning;
 
     public void Initialize(MineralData data)
     {
@@ -22,12 +21,23 @@ public class Mineral : Damagable
         MaxHealth = data.MaxHealth;
         MineralName = data.Name;
         mineralSpriteRenderer.color = data.Color;
+        UpdateHealthbar();
     }
 
-    void Awake()
+    public void DestroyMineral()
+    {
+        transform.Find("Sprite").gameObject.GetComponent<SpriteRenderer>().color = new(0, 0, 0, 0);
+        transform.Find("Health Bar").gameObject.SetActive(false);
+        hitEffect.Play();
+        GameManager.instance.AddMineral(MineralName, 1);
+        StartCoroutine(MineralRemovalDelay());
+    }
+
+    void Start()
     {
         playerDrill = FindFirstObjectByType<PlayerDrill>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        OnDeathEvent.AddListener(DestroyMineral);
     }
 
     //ai gen movement + june edits
@@ -40,7 +50,7 @@ public class Mineral : Damagable
         }
 
         // move left according to the player's drill speed (assume PlayerController always exists)
-        if (!hasCollidedWithDrill)
+        if (playerDrill.IsMoving)
         {
             transform.Translate(Vector3.left * playerDrill.DrillSpeed * Time.deltaTime, Space.World);
         }
@@ -50,48 +60,11 @@ public class Mineral : Damagable
         {
             Destroy(gameObject);
         }
-
-        if (Health <= 0)
-        {
-            StartCoroutine(MineralRemove());
-        }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private IEnumerator MineralRemovalDelay()
     {
-        if (collision.gameObject.CompareTag("Drill"))
-        {
-            if (!hasCollidedWithDrill)
-            {
-                StartCoroutine(DrainHP());
-                hasCollidedWithDrill = true;
-            }
-        }
-    }
-
-    private IEnumerator DrainHP()
-    {
-        //deal damage based on player's drill damage, time interval based on drillSpeed * 0.1
-        DealDamage(playerDrill.DrillDamage);
-        hitEffect.Play();
-        yield return new WaitForSeconds(2 * (playerDrill.DrillSpeed * 0.1f));
-    }
-
-    private IEnumerator MineralRemove()
-    {
-        if (!isRemoveRunning)
-        {
-            //set mineral sprite's alpha to 0, play hitEffect
-            transform.Find("Sprite").gameObject.GetComponent<SpriteRenderer>().color = new(0, 0, 0, 0);
-            transform.Find("Health Bar").gameObject.SetActive(false);
-            hitEffect.Play();
-            isRemoveRunning = true;
-            GameManager.instance.AddMineral(MineralName, 1);
-        }
         yield return new WaitForSeconds(1);
-
         Destroy(gameObject);
-
     }
-
 }
