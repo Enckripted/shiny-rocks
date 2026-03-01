@@ -4658,11 +4658,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   healthbar: {fileID: 1341097788}
+  damageNumberPrefab: {fileID: 6584957645631030996, guid: 0ae18cabce949c74cb90402e393d4624, type: 3}
+  showDamageNumbers: 0
   OnDeathEvent:
     m_PersistentCalls:
       m_Calls: []
   InitialHealth: 200
-  DrillSpeed: 4
+  DrillSpeed: 2
   DrillDamage: 2
   WeaponDamage: 0
   DrillDepth: 0
