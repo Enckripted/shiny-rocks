@@ -23,12 +23,12 @@ public class PlayerDrill : Damagable
     public double BaseWeaponCooldown;
 
     [Header("Levels")]
-    public int drillHealthLevel;
-    public int drillSpeedLevel;
-    public int drillDamageLevel;
-    public int weaponDamageLevel;
-    public int WeaponCooldownLevel;
-    public int weaponRadiusLevel;
+    public int drillHealthLevel = 0;
+    public int drillSpeedLevel = 0;
+    public int drillDamageLevel = 0;
+    public int weaponDamageLevel = 0;
+    public int WeaponCooldownLevel = 0;
+    public int weaponRadiusLevel = 0;
 
     public bool IsMoving;
 
@@ -52,10 +52,10 @@ public class PlayerDrill : Damagable
     {
         OnDeathEvent.AddListener(StopRun);
         GameManager.instance.runStartEvent.AddListener(OnRunBegin);
-        OnRunBegin();
-        Health = (float)InitialHealth;
-        MaxHealth = (float)InitialHealth;
+        Health = 1;
+        MaxHealth = 1;
         UpdateHealthbar();
+        //OnRunBegin();
         instance = this;
     }
 

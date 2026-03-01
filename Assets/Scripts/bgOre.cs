@@ -16,7 +16,7 @@ public class bgOre : MonoBehaviour
         // move left according to the player's drill speed (assume PlayerController always exists)
         if (playerDrill.IsMoving)
         {
-            transform.Translate(Vector3.left * playerDrill.DrillSpeed * Time.deltaTime, Space.World);
+            transform.Translate(Vector3.left * (float)playerDrill.DrillSpeed * Time.deltaTime, Space.World);
         }
 
         // destroy once it is no longer visible by any camera
