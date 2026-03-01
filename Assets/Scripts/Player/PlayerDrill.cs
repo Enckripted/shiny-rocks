@@ -23,6 +23,7 @@ public class PlayerDrill : Damagable
     {
         Health = InitialHealth;
         MaxHealth = InitialHealth;
+        DrillDepth = 0;
         UpdateHealthbar();
     }
 
