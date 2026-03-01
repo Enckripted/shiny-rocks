@@ -1,12 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
+
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
     public double Money { get; private set; }
-    public SerializedDictionary<string, int> MineralInventory { get; private set; }
+    private SerializedDictionary<string, int> MineralInventory { get; set; }
+
+    //events
+    public UnityEvent runStartEvent = new UnityEvent();
+    public UnityEvent runStopEvent = new UnityEvent();
 
     //canvas groups
     private CanvasGroup preRunUI;
@@ -15,15 +23,37 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
+
         preRunUI = GameObject.FindGameObjectWithTag("PreRunUI").GetComponent<CanvasGroup>();
         midRunUI = GameObject.FindGameObjectWithTag("MidRunUI").GetComponent<CanvasGroup>();
-        
+
         ShowHomeUI();
         Money = 0;
         MineralInventory = new SerializedDictionary<string, int>();
     }
 
+    void Update()
+    {
+        /*
+        if (!inRun) return;
+        float rand = Random.Range(0f, 1f);
+        if (rand <= 0.001) StopRun(); */
+    }
+
     //ai gen zone
+    public void AddMoney(double amount)
+    {
+        Money += amount;
+    }
+
+    public bool RemoveMoney(double amount)
+    {
+        if (Money <= amount) return false;
+        Money -= amount;
+        return true;
+    }
+
     public int GetMineralQuantity(string mineral)
     {
         if (MineralInventory.TryGetValue(mineral, out int qty))
@@ -54,7 +84,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void ShowHomeUI()
+    private void ShowHomeUI()
     {
 
         //show home ui, hide mid-run ui
@@ -65,12 +95,10 @@ public class GameManager : MonoBehaviour
         midRunUI.alpha = 0;
         midRunUI.interactable = false;
         midRunUI.blocksRaycasts = false;
-
     }
 
-    public void StartRun()
+    private void ShowRunUI()
     {
-
         //show mid-run ui, hide home ui
         midRunUI.alpha = 1;
         midRunUI.interactable = true;
@@ -79,9 +107,27 @@ public class GameManager : MonoBehaviour
         preRunUI.alpha = 0;
         preRunUI.interactable = false;
         preRunUI.blocksRaycasts = false;
+    }
 
+    public void StartRun()
+    {
+        ShowRunUI();
         inRun = true;
+        MineralInventory = new SerializedDictionary<string, int>();
+        runStartEvent.Invoke();
+    }
 
+    //we want to stop the game loop to show the game over screen and cash out
+    public void StopRun()
+    {
+        inRun = false;
+        runStopEvent.Invoke();
+    }
+
+    //and then through clicking cash out we end the run
+    public void EndRun()
+    {
+        ShowHomeUI();
     }
 
 }
