@@ -9,6 +9,7 @@ public class Enemy : Damagable
     private Vector3 targetPosition;
     private Rigidbody2D rb;
     private PlayerDrill playerDrill;
+    private SpriteRenderer spriteRenderer;
 
     private float lastAttack = 0;
 
@@ -28,12 +29,14 @@ public class Enemy : Damagable
     {
         rb = GetComponent<Rigidbody2D>();
         playerDrill = FindFirstObjectByType<PlayerDrill>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        if (Health <= 0 || !GameManager.instance.inRun)
+        if (Health <= 0 || !GameManager.instance.inRun || !spriteRenderer.isVisible)
         {
+            EnemySpawnManager.numOfEnemies--;
             Destroy(gameObject);
             return;
         }
@@ -53,6 +56,7 @@ public class Enemy : Damagable
 
             return;
         }
-        rb.linearVelocity = Vector2.right * Speed;
+        //move slower if the drill is currently moving forward
+        rb.linearVelocity = Vector2.right * Speed + (playerDrill.IsMoving ? Vector2.left * playerDrill.DrillSpeed : Vector2.zero);
     }
 }

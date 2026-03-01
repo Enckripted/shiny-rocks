@@ -9,9 +9,12 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] private GameObject lanesObject;
 
     [SerializeField] private float spawnInterval;
+    [SerializeField] private int maxEnemiesAtOnce;
 
     private EnemyData[] allEnemyData;
     private List<Vector3> lanePositions;
+
+    public static int numOfEnemies;
 
     private Camera mainCamera;
 
@@ -43,6 +46,7 @@ public class EnemySpawnManager : MonoBehaviour
         Vector3 lanePosition = lanePositions[lane];
         float leftXPosition = mainCamera.transform.position.x - (mainCamera.aspect * mainCamera.orthographicSize);
         enemySpawner.SpawnEnemy(enemyData, new(leftXPosition, lanePosition.y, lanePosition.z), lanePosition);
+        numOfEnemies++;
     }
 
     private void SpawnEnemyInRandLane()
@@ -68,7 +72,8 @@ public class EnemySpawnManager : MonoBehaviour
         }
         while (GameManager.instance.inRun)
         {
-            SpawnEnemyInRandLane();
+            if (numOfEnemies < maxEnemiesAtOnce)
+                SpawnEnemyInRandLane();
             yield return new WaitForSeconds(spawnInterval);
         }
     }
