@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class PlayerDrill : Damagable
@@ -34,6 +35,7 @@ public class PlayerDrill : Damagable
 
     private Collider2D drillCollider;
     private List<Mineral> collidingMinerals = new List<Mineral>();
+    private ParticleSystem miningParticles;
 
     private void StopRun()
     {
@@ -57,6 +59,9 @@ public class PlayerDrill : Damagable
         UpdateHealthbar();
         //OnRunBegin();
         instance = this;
+
+        miningParticles = transform.Find("MiningParticles").gameObject.GetComponent<ParticleSystem>();
+
     }
 
     void Update()
@@ -74,6 +79,15 @@ public class PlayerDrill : Damagable
         if (IsMoving)
         {
             DrillDepth += (float)DrillSpeed * Time.deltaTime / 10;
+            if(miningParticles.isPlaying == false)
+            {    
+                miningParticles.Play();
+            }
+            
+        }
+        else
+        {
+            miningParticles.Stop();
         }
     }
 
