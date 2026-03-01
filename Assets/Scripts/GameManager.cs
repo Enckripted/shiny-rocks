@@ -32,7 +32,6 @@ public class GameManager : MonoBehaviour
         ShowHomeUI();
         Money = 0;
         MineralInventory = new SerializedDictionary<string, int>();
-        Debug.Log(MineralInventory);
     }
 
     //ai gen zone
