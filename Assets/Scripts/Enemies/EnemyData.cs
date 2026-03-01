@@ -7,5 +7,6 @@ public class EnemyData : ScriptableObject
     public int MaxHealth;
     public float Damage;
     public float Speed;
+    public float AttackSpeed;
     public Texture2D Sprite;
 }
