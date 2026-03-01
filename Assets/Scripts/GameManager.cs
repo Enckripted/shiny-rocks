@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
-using UnityEngine.UIElements;
 
 
 public class GameManager : MonoBehaviour
@@ -16,6 +14,8 @@ public class GameManager : MonoBehaviour
     public UnityEvent runStartEvent = new UnityEvent();
     public UnityEvent runStopEvent = new UnityEvent();
 
+    private ShopUI Shop;
+
     //canvas groups
     private CanvasGroup preRunUI;
     private CanvasGroup midRunUI;
@@ -27,18 +27,12 @@ public class GameManager : MonoBehaviour
 
         preRunUI = GameObject.FindGameObjectWithTag("PreRunUI").GetComponent<CanvasGroup>();
         midRunUI = GameObject.FindGameObjectWithTag("MidRunUI").GetComponent<CanvasGroup>();
+        Shop = FindFirstObjectByType<ShopUI>();
 
         ShowHomeUI();
         Money = 0;
         MineralInventory = new SerializedDictionary<string, int>();
-    }
-
-    void Update()
-    {
-        /*
-        if (!inRun) return;
-        float rand = Random.Range(0f, 1f);
-        if (rand <= 0.001) StopRun(); */
+        Debug.Log(MineralInventory);
     }
 
     //ai gen zone
@@ -95,6 +89,9 @@ public class GameManager : MonoBehaviour
         midRunUI.alpha = 0;
         midRunUI.interactable = false;
         midRunUI.blocksRaycasts = false;
+
+        //stock the shop
+        Shop.SetShop();
     }
 
     private void ShowRunUI()
