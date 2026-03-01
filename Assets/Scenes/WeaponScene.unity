@@ -865,7 +865,7 @@ GameObject:
   - component: {fileID: 556129708}
   - component: {fileID: 556129709}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1654,9 +1654,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a5bb0d1ca590b680a33d28a4760b119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponBase
+  playerDrill: {fileID: 0}
   fireEffect: {fileID: 0}
   mousePos: {x: 0, y: 0, z: 0}
   worldMousePos: {x: 0, y: 0, z: 0}
+  shotCooldownTimer: 0
+  shotCooldown: 0
 --- !u!50 &1052149591
 Rigidbody2D:
   serializedVersion: 5
@@ -3388,6 +3391,7 @@ MonoBehaviour:
   DrillSpeed: 8
   InitialHealth: 200
   DrillDamage: 20
+  WeaponDamage: 5
 --- !u!1001 &1892929215
 PrefabInstance:
   m_ObjectHideFlags: 0
