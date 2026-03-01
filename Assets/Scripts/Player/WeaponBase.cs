@@ -21,8 +21,19 @@ public class WeaponBase : MonoBehaviour
 
     void Update()
     {
+
+        if(weaponCooldownTimer > 0)
+        {
+            weaponCooldownTimer -= Time.deltaTime;
+            transform.Find("Sprite").gameObject.GetComponent<SpriteRenderer>().color = new Color(.5f, .5f, .5f);
+        }
+        else
+        {
+            transform.Find("Sprite").gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+        }
+
         mousePos = Mouse.current.position.ReadValue();
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (Mouse.current.leftButton.wasPressedThisFrame && weaponCooldownTimer <= 0)
         {
             CircleCast();
             StartCoroutine(PlayFireEffect());
@@ -41,6 +52,14 @@ public class WeaponBase : MonoBehaviour
 
     void CircleCast()
     {
+        if(weaponCooldownTimer <= 0)
+        {
+            weaponCooldownTimer = weaponCooldown;
+        } else
+        {
+            return;
+        }
+
         RaycastHit2D[] hits = Physics2D.CircleCastAll(
             worldMousePos,
             radius,
