@@ -9,6 +9,14 @@ public class PlayerDrill : Damagable
     public float WeaponDamage;
     public float DrillDepth;
 
+    [Header("Levels")]
+    public int drillHealthLevel;
+    public int drillSpeedLevel;
+    public int drillDamageLevel;
+    public int weaponDamageLevel;
+    public int WeaponCooldownLevel;
+    public int weaponRadiusLevel;
+
     public bool IsMoving;
 
     private Collider2D drillCollider;
