@@ -47,6 +47,7 @@ MonoBehaviour:
   enemySpawner: {fileID: 0}
   lanesObject: {fileID: 0}
   spawnInterval: 2
+  maxEnemiesAtOnce: 10
 --- !u!1 &4920624399547817949
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,4 +127,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MineralSpawnManager
   spawner: {fileID: 0}
   gameManager: {fileID: 0}
-  spawnDistance: 2
+  spawnDistance: 1

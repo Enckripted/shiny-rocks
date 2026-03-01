@@ -4662,7 +4662,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   InitialHealth: 200
-  DrillSpeed: 8
+  DrillSpeed: 4
   DrillDamage: 2
   WeaponDamage: 0
   DrillDepth: 0

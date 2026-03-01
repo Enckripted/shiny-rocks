@@ -58,7 +58,8 @@ public class PlayerDrill : Damagable
         if (mineral == null)
             return;
 
-        mineral.DealDamage(DrillDamage);
+        if (DrillDamage / 10 >= mineral.Health)
+            mineral.DealDamage(DrillDamage);
         if (mineral.Health > 0)
             collidingMinerals.Add(mineral);
     }
