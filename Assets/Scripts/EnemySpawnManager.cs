@@ -67,12 +67,11 @@ public class EnemySpawnManager : MonoBehaviour
 
     private IEnumerator SpawnLoop()
     {
-        while (!GameManager.instance.inRun)
+        while (true)
         {
-            yield return new WaitForEndOfFrame();
-        }
-        while (GameManager.instance.inRun)
-        {
+            if (!GameManager.instance.inRun)
+                yield return new WaitForEndOfFrame();
+
             if (numOfEnemies < maxEnemiesAtOnce)
                 SpawnEnemyInRandLane();
             yield return new WaitForSeconds(spawnInterval);

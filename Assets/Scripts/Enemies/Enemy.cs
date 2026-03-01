@@ -33,7 +33,7 @@ public class Enemy : Damagable
     {
         rb = GetComponent<Rigidbody2D>();
         playerDrill = FindFirstObjectByType<PlayerDrill>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Update()
