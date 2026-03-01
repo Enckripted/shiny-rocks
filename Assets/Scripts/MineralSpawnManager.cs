@@ -69,22 +69,11 @@ public class MineralSpawnManager : MonoBehaviour
     {
         //ensures that coroutine will not start again once started
         //and will not stop again once stopped
-        if (gameManager.inRun)
+        if (gameManager.inRun && !isSpawning)
         {
-            if (isSpawning == false)
-            {
-                // start the repeating spawn loop
-                StartCoroutine(SpawnLoop());
-                isSpawning = true;
-            }
-        }
-        else
-        {
-            if (isSpawning == true)
-            {
-                StopCoroutine(SpawnLoop());
-                isSpawning = false;
-            }
+            StartCoroutine(SpawnLoop());
+            isSpawning = true;
+
         }
     }
 
@@ -92,6 +81,12 @@ public class MineralSpawnManager : MonoBehaviour
     {
         while (true)
         {
+            if (!gameManager.inRun)
+            {
+                isSpawning = false;
+                yield break;
+            }
+
             SpawnRandomMineral();
             yield return new WaitForSeconds(spawnInterval);
         }

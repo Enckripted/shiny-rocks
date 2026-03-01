@@ -33,6 +33,12 @@ public class Mineral : Damagable
     //ai gen movement + june edits
     void Update()
     {
+        if (!GameManager.instance.inRun)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         // move left according to the player's drill speed (assume PlayerController always exists)
         if (!hasCollidedWithDrill)
         {

@@ -31,10 +31,29 @@ public class GameManager : MonoBehaviour
         ShowHomeUI();
         Money = 0;
         MineralInventory = new SerializedDictionary<string, int>();
+    }
 
+    void Update()
+    {
+        /*
+        if (!inRun) return;
+        float rand = Random.Range(0f, 1f);
+        if (rand <= 0.001) StopRun(); */
     }
 
     //ai gen zone
+    public void AddMoney(double amount)
+    {
+        Money += amount;
+    }
+
+    public bool RemoveMoney(double amount)
+    {
+        if (Money <= amount) return false;
+        Money -= amount;
+        return true;
+    }
+
     public int GetMineralQuantity(string mineral)
     {
         if (MineralInventory.TryGetValue(mineral, out int qty))
@@ -94,6 +113,7 @@ public class GameManager : MonoBehaviour
     {
         ShowRunUI();
         inRun = true;
+        MineralInventory = new SerializedDictionary<string, int>();
         runStartEvent.Invoke();
     }
 

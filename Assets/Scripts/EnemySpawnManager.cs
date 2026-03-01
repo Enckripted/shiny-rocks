@@ -62,7 +62,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     private IEnumerator SpawnLoop()
     {
-        while (true)
+        while (GameManager.instance.inRun)
         {
             SpawnEnemyInRandLane();
             yield return new WaitForSeconds(spawnInterval);
