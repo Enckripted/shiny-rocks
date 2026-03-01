@@ -113,6 +113,7 @@ MonoBehaviour:
   OnDeathEvent:
     m_PersistentCalls:
       m_Calls: []
+  mineralSpriteRenderer: {fileID: 4256143980246744868}
   hitEffect: {fileID: 7685837812495177004}
 --- !u!61 &2469639109035000643
 BoxCollider2D:

@@ -26,6 +26,12 @@ public class Enemy : Damagable
 
     void Update()
     {
+        if (!GameManager.instance.inRun)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         if (transform.position.x >= targetPosition.x)
         {
             transform.position = targetPosition;

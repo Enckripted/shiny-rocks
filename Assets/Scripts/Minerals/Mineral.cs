@@ -5,9 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Mineral : Damagable
 {
+    public string MineralName { get; private set; }
+
     private PlayerDrill playerDrill;
     private SpriteRenderer spriteRenderer;
 
+    [SerializeField] private SpriteRenderer mineralSpriteRenderer;
     [SerializeField] private ParticleSystem hitEffect;
 
     private bool hasCollidedWithDrill;
@@ -17,6 +20,8 @@ public class Mineral : Damagable
     {
         Health = data.MaxHealth;
         MaxHealth = data.MaxHealth;
+        MineralName = data.Name;
+        mineralSpriteRenderer.color = data.Color;
     }
 
     void Awake()
@@ -28,6 +33,12 @@ public class Mineral : Damagable
     //ai gen movement + june edits
     void Update()
     {
+        if (!GameManager.instance.inRun)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         // move left according to the player's drill speed (assume PlayerController always exists)
         if (!hasCollidedWithDrill)
         {
@@ -44,7 +55,6 @@ public class Mineral : Damagable
         {
             StartCoroutine(MineralRemove());
         }
-
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -76,9 +86,12 @@ public class Mineral : Damagable
             transform.Find("Health Bar").gameObject.SetActive(false);
             hitEffect.Play();
             isRemoveRunning = true;
+            GameManager.instance.AddMineral(MineralName, 1);
         }
         yield return new WaitForSeconds(1);
+
         Destroy(gameObject);
+
     }
 
 }

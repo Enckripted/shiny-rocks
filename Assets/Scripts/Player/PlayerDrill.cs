@@ -6,13 +6,14 @@ public class PlayerDrill : Damagable
     public int InitialHealth;
     public float DrillDamage;
     public float WeaponDamage;
+    public float DrillDepth;
 
-    private void EndRun()
+    private void StopRun()
     {
-        //TODO: end run
+        GameManager.instance.StopRun();
     }
 
-    public void OnRunBegin()
+    private void OnRunBegin()
     {
         Health = InitialHealth;
         MaxHealth = InitialHealth;
@@ -21,7 +22,9 @@ public class PlayerDrill : Damagable
 
     void Start()
     {
-        OnDeathEvent.AddListener(EndRun);
+
+        OnDeathEvent.AddListener(StopRun);
+        GameManager.instance.runStartEvent.AddListener(OnRunBegin);
         OnRunBegin();
     }
 }
