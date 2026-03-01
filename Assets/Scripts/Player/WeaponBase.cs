@@ -1,72 +1,60 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class WeaponBase : MonoBehaviour
+public class MouseCircleCast : MonoBehaviour
 {
-
-    [SerializeField] private PlayerDrill playerDrill;
     [SerializeField] private GameObject fireEffect;
+    [SerializeField] private float radius = 0.5f;
+    [SerializeField] private LayerMask layerMask;
     [SerializeField] private Vector3 mousePos;
     [SerializeField] private Vector3 worldMousePos;
-    [SerializeField] private float shotCooldownTimer;
-    [SerializeField] private float shotCooldown = 0.5f;
-
 
     void Awake()
     {
         fireEffect = transform.Find("FireEffect").gameObject;
-        playerDrill = FindFirstObjectByType<PlayerDrill>();
     }
 
     void Update()
     {
-        if(shotCooldownTimer > 0)
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            shotCooldownTimer -= Time.deltaTime;
-            transform.Find("Sprite").gameObject.GetComponent<SpriteRenderer>().color = new Color(.25f, .25f, .25f);
+            CircleCast();
+            StartCoroutine(PlayFireEffect());
         }
-        else
-        {
-            transform.Find("Sprite").gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
-        }
+    }
 
-        GameObject weaponCollider = transform.Find("WeaponCollider").gameObject;
+    void CircleCast()
+    {
+        // Convert mouse position to world position
         mousePos = Mouse.current.position.ReadValue();
         worldMousePos = Camera.main.ScreenToWorldPoint(new Vector3(
             mousePos.x,
             mousePos.y,
             Camera.main.nearClipPlane
         ));
-        weaponCollider.transform.position = worldMousePos;
-    }
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (Mouse.current.leftButton.wasPressedThisFrame && shotCooldownTimer <= 0)
-        {
-            Debug.Log("hit" + collision.gameObject.name);
-            if (collision.gameObject.CompareTag("Enemy"))
-            {
-                StartCoroutine(PlayFireEffect());
-                collision.gameObject.GetComponent<Enemy>().DealDamage(playerDrill.WeaponDamage);
-                shotCooldownTimer = shotCooldown;
-            }
-        }   
+        worldMousePos.z = 0f;
+
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(
+            worldMousePos,
+            radius,
+            Vector2.zero,
+            0f,
+            layerMask
+        );
+
+        Debug.Log(hits);
     }
 
-    void OnTriggerStay2D(Collider2D collision)
+    private void OnDrawGizmos()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame && shotCooldownTimer <= 0)
-        {
-            Debug.Log("hit" + collision.gameObject.name);
-            if (collision.gameObject.CompareTag("Enemy"))
-            {
-                StartCoroutine(PlayFireEffect());
-                collision.gameObject.GetComponent<Enemy>().DealDamage(playerDrill.WeaponDamage);
-                shotCooldownTimer = shotCooldown;
-            }
-        }   
+        if (Camera.main == null) return;
+
+        Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePos);
+        worldMousePosition.z = 0f;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(worldMousePosition, radius);
     }
 
     IEnumerator PlayFireEffect()
@@ -75,5 +63,4 @@ public class WeaponBase : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         fireEffect.GetComponent<SpriteRenderer>().color = new Color(0,0,0,0);
     }
-
 }
