@@ -1164,17 +1164,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f25fc1fe3c4e6404382b52904a2586a9, type: 3}
---- !u!114 &694332777 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6302098460339380785, guid: f25fc1fe3c4e6404382b52904a2586a9, type: 3}
-  m_PrefabInstance: {fileID: 694332776}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46a27820fb198c846afeb1301d644c7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
 --- !u!1 &802029048
 GameObject:
   m_ObjectHideFlags: 0
@@ -2228,17 +2217,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 524da854223b22141877e05e86607487, type: 3}
---- !u!114 &1431788552 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 980070055558260863, guid: 524da854223b22141877e05e86607487, type: 3}
-  m_PrefabInstance: {fileID: 1431788551}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b11b12686c86d9469b1eb4c985863ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthBar
 --- !u!4 &1431788553 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 704793821091668371, guid: 524da854223b22141877e05e86607487, type: 3}
@@ -2259,7 +2237,7 @@ PrefabInstance:
     - target: {fileID: 2187063694368864295, guid: 820364c78db7516459eddfcec5930967, type: 3}
       propertyPath: enemySpawner
       value: 
-      objectReference: {fileID: 694332777}
+      objectReference: {fileID: 0}
     - target: {fileID: 2356092264198563898, guid: 820364c78db7516459eddfcec5930967, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.24646
@@ -3101,12 +3079,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392fdd22545d731df917572734b70d96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  healthbar: {fileID: 1431788552}
-  OnDeathEvent:
-    m_PersistentCalls:
-      m_Calls: []
   DrillSpeed: 2
-  InitialHealth: 500
+  drillDamage: 0
 --- !u!1 &1964252365
 GameObject:
   m_ObjectHideFlags: 0
@@ -3136,6 +3110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f991e7703b0f7a45ab3f76fa7874d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  inRun: 0
 --- !u!4 &1964252367
 Transform:
   m_ObjectHideFlags: 0
