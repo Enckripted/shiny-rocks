@@ -31,7 +31,7 @@ public abstract class Damagable : MonoBehaviour
     {
         if (showDamageNumbers)
         {
-            DamageNumber nDmgNumber = Instantiate(damageNumberPrefab, transform.position, transform.rotation).GetComponent<DamageNumber>();
+            DamageNumber nDmgNumber = Instantiate(damageNumberPrefab, transform.position, Quaternion.identity).GetComponent<DamageNumber>();
             nDmgNumber.damageNum = Math.Floor(damage);
             //nDmgNumber.GetComponent<RectTransform>().position = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
         }
