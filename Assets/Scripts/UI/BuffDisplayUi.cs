@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class BuffDisplayUi : MonoBehaviour
 {
     private TextMeshProUGUI buffText;
     private UpgradeBuffs buffs;
+    [SerializeField] private List<GameObject> panels;
 
     void Awake()
     {
@@ -19,23 +21,14 @@ public class BuffDisplayUi : MonoBehaviour
         if (buffText == null || buffs == null)
             return;
 
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine("Bonuses From Upgrades:");
+        Debug.Log(panels[0].name);
 
-        // note: formatting is just an example, you can tweak decimals or add labels as needed
-        if (buffs.DrillHealthAddition != 0)
-            stringBuilder.AppendLine($"Drill Health: +{buffs.DrillHealthAddition:F0}");
-        if (buffs.DrillSpeedAddition != 0)
-            stringBuilder.AppendLine($"Drill Speed: +{buffs.DrillSpeedAddition:F2}");
-        if (buffs.DrillDamageMultiplier != 1)
-            stringBuilder.AppendLine($"Drill Damage ×{buffs.DrillDamageMultiplier:F2}");
-        if (buffs.WeaponDamageMultiplier != 1)
-            stringBuilder.AppendLine($"Weapon Damage ×{buffs.WeaponDamageMultiplier:F2}");
-        if (buffs.WeaponCooldownAddition != 0)
-            stringBuilder.AppendLine($"Weapon Cooldown: {buffs.WeaponCooldownAddition:F2}s");
-        if (buffs.WeaponRadiusAddition != 0)
-            stringBuilder.AppendLine($"Weapon Radius: +{buffs.WeaponRadiusAddition:F2}");
+        panels[0].GetComponent<TMP_Text>().text = "Drill Health: " + buffs.DrillHealthAddition;
+        panels[1].GetComponent<TMP_Text>().text = "Drill Speed: " + buffs.DrillSpeedAddition;
+        panels[2].GetComponent<TMP_Text>().text = "Drill Damage: " + buffs.DrillDamageMultiplier;
+        panels[3].GetComponent<TMP_Text>().text = "Weapon Damage: " + buffs.WeaponDamageMultiplier;
+        panels[4].GetComponent<TMP_Text>().text = "Weapon Cooldown: " + buffs.WeaponCooldownAddition;
+        panels[5].GetComponent<TMP_Text>().text = "Weapon Radius: " + buffs.WeaponRadiusAddition;
 
-        buffText.text = stringBuilder.ToString();
     }
 }
