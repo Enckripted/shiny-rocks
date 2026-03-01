@@ -9,6 +9,7 @@ public class MouseCircleCast : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private Vector3 mousePos;
     [SerializeField] private Vector3 worldMousePos;
+    [SerializeField] private int WeaponDamage;
 
     void Awake()
     {
@@ -43,7 +44,10 @@ public class MouseCircleCast : MonoBehaviour
             layerMask
         );
 
-        Debug.Log(hits);
+        for(var i = 0; i < hits.Length; i++)
+        {
+            hits[i].collider.gameObject.GetComponent<Enemy>().DealDamage(WeaponDamage);
+        }
     }
 
     private void OnDrawGizmos()
