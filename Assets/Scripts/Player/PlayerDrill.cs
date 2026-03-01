@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -36,6 +37,7 @@ public class PlayerDrill : Damagable
     private Collider2D drillCollider;
     private AudioSource source;
     private List<Mineral> collidingMinerals = new List<Mineral>();
+    private ParticleSystem miningParticles;
 
     [SerializeField] private AudioClip clip;
 
@@ -64,6 +66,9 @@ public class PlayerDrill : Damagable
         instance = this;
         source.clip = clip;
         source.Play();
+
+        miningParticles = transform.Find("MiningParticles").gameObject.GetComponent<ParticleSystem>();
+
     }
 
     void Update()
@@ -81,6 +86,15 @@ public class PlayerDrill : Damagable
         if (IsMoving && GameManager.instance.inRun)
         {
             DrillDepth += (float)DrillSpeed * Time.deltaTime / 10;
+            if(miningParticles.isPlaying == false)
+            {    
+                miningParticles.Play();
+            }
+            
+        }
+        else
+        {
+            miningParticles.Stop();
         }
 
         source.volume = IsMoving ? 0.25f : 0;

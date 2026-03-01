@@ -91,7 +91,7 @@ Transform:
   m_GameObject: {fileID: 1654438398721539150}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8, y: 0, z: 0}
+  m_LocalPosition: {x: -0.301, y: 0.027, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -258,7 +258,6 @@ GameObject:
   - component: {fileID: 6443108872296800144}
   - component: {fileID: 3799005154051765794}
   - component: {fileID: 5687750192598606712}
-  - component: {fileID: 5044096663357395034}
   m_Layer: 0
   m_Name: gear_0 (1)
   m_TagString: Untagged
@@ -353,19 +352,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GearRotate
   rotateSpeed: -1
---- !u!114 &5044096663357395034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3127813885071723056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 995b14530b27d049a83976077d89efaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GearRotate
-  rotateSpeed: 0
 --- !u!1 &4183234750049970066
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +363,6 @@ GameObject:
   - component: {fileID: 5840803143685598969}
   - component: {fileID: 3650920149014392248}
   - component: {fileID: 2118824577055329353}
-  - component: {fileID: 8940225489801990804}
   m_Layer: 0
   m_Name: gear_0 (2)
   m_TagString: Untagged
@@ -472,19 +457,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GearRotate
   rotateSpeed: 1
---- !u!114 &8940225489801990804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4183234750049970066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 995b14530b27d049a83976077d89efaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GearRotate
-  rotateSpeed: 0
 --- !u!1 &4232918235265500184
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,7 +525,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.75
+  m_Radius: 0.5
 --- !u!212 &8203822718281244661
 SpriteRenderer:
   serializedVersion: 2
@@ -715,7 +687,6 @@ GameObject:
   - component: {fileID: 7595153834396959986}
   - component: {fileID: 7243296658631499048}
   - component: {fileID: 7418850958752112475}
-  - component: {fileID: 3167154716119053748}
   m_Layer: 0
   m_Name: gear_0
   m_TagString: Untagged
@@ -810,19 +781,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GearRotate
   rotateSpeed: 1
---- !u!114 &3167154716119053748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7484242677058389721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 995b14530b27d049a83976077d89efaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GearRotate
-  rotateSpeed: 0
 --- !u!1 &7915992724744660047
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,6 +793,7 @@ GameObject:
   - component: {fileID: 5080446556822409914}
   - component: {fileID: 6740056905704138423}
   - component: {fileID: 8249380357370166250}
+  - component: {fileID: 4540954338850898991}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -859,6 +818,7 @@ Transform:
   - {fileID: 2539360928829844215}
   - {fileID: 8533099419503336350}
   - {fileID: 7114230044855646418}
+  - {fileID: 829981344275027653}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5080446556822409914
@@ -932,6 +892,8 @@ CircleCollider2D:
   m_Radius: 0.60252035
 --- !u!82 &8249380357370166250
 AudioSource:
+--- !u!111 &4540954338850898991
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1027,6 +989,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  m_Animation: {fileID: 7400000, guid: 11c5a73e2fa6e3758b23ad274f0ace40, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 11c5a73e2fa6e3758b23ad274f0ace40, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
 --- !u!1 &8604457172499264269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,3 +1181,73 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1001 &4299991651252290017
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1018268116362614973}
+    m_Modifications:
+    - target: {fileID: 3470036970191656740, guid: 62c1f02d152e2ecee965330276ce3999, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470036970191656740, guid: 62c1f02d152e2ecee965330276ce3999, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470036970191656740, guid: 62c1f02d152e2ecee965330276ce3999, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.378
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470036970191656740, guid: 62c1f02d152e2ecee965330276ce3999, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.104
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470036970191656740, guid: 62c1f02d152e2ecee965330276ce3999, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470036970191656740, guid: 62c1f02d152e2ecee965330276ce3999, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470036970191656740, guid: 62c1f02d152e2ecee965330276ce3999, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470036970191656740, guid: 62c1f02d152e2ecee965330276ce3999, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470036970191656740, guid: 62c1f02d152e2ecee965330276ce3999, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470036970191656740, guid: 62c1f02d152e2ecee965330276ce3999, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470036970191656740, guid: 62c1f02d152e2ecee965330276ce3999, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470036970191656740, guid: 62c1f02d152e2ecee965330276ce3999, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4839040133983192510, guid: 62c1f02d152e2ecee965330276ce3999, type: 3}
+      propertyPath: m_Name
+      value: MiningParticles
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 62c1f02d152e2ecee965330276ce3999, type: 3}
+--- !u!4 &829981344275027653 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3470036970191656740, guid: 62c1f02d152e2ecee965330276ce3999, type: 3}
+  m_PrefabInstance: {fileID: 4299991651252290017}
+  m_PrefabAsset: {fileID: 0}
