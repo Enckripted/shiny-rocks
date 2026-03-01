@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Enemy : Damagable
@@ -15,11 +16,14 @@ public class Enemy : Damagable
 
     public void Initialize(EnemyData data, Vector3 target)
     {
-        Health = data.MaxHealth;
-        MaxHealth = data.MaxHealth;
-        Speed = data.Speed;
-        Damage = data.Damage;
-        AttackSpeed = data.AttackSpeed;
+        float scaleLevel = (float)Math.Floor(playerDrill.DrillDepth / 10);
+        float maxHealth = data.MaxHealth * (float)Math.Pow(data.HealthScaleMult, scaleLevel);
+
+        Health = maxHealth;
+        MaxHealth = maxHealth;
+        Speed = data.Speed + data.SpeedScaleAdd * scaleLevel;
+        Damage = data.Damage + (float)Math.Pow(data.DamageScaleMult, scaleLevel);
+        AttackSpeed = data.AttackSpeed - data.AttackSpeedScaleAdd * scaleLevel;
         UpdateHealthbar();
 
         targetPosition = target;
