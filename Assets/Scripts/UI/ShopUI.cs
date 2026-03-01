@@ -163,6 +163,8 @@ public class ShopUI : MonoBehaviour
     void BuyUpgrade(string upgradeName, int upgradeCost)
     {
 
+         GameManager.instance.RemoveMoney(upgradeCost);
+         
         switch (upgradeName)
         {
             case "Drill Speed":
