@@ -3,15 +3,18 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(AudioSource))]
 public class Mineral : Damagable
 {
     public string MineralName { get; private set; }
 
     private PlayerDrill playerDrill;
     private SpriteRenderer spriteRenderer;
+    private AudioSource source;
 
     [SerializeField] private SpriteRenderer mineralSpriteRenderer;
     [SerializeField] private ParticleSystem hitEffect;
+    [SerializeField] private AudioClip clip;
 
     private bool hasCollidedWithDrill;
 
@@ -30,6 +33,8 @@ public class Mineral : Damagable
         transform.Find("Health Bar").gameObject.SetActive(false);
         hitEffect.Play();
         GameManager.instance.AddMineral(MineralName, 1);
+        source.clip = clip;
+        source.Play();
         StartCoroutine(MineralRemovalDelay());
     }
 
@@ -37,6 +42,7 @@ public class Mineral : Damagable
     {
         playerDrill = FindFirstObjectByType<PlayerDrill>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        source = GetComponent<AudioSource>();
         OnDeathEvent.AddListener(DestroyMineral);
     }
 
