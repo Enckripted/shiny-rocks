@@ -79,6 +79,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::bgOreSpawner
   bgOre: {fileID: 6378983629936817073, guid: f80c6cc4621eaaa9286426f37c7440f0, type: 3}
+  range1: {x: 0, y: 0}
+  range2: {x: 0, y: 0}
+  scaleRange: {x: 0, y: 0}
 --- !u!1 &6121408649183438897
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MineralSpawner
   mineralPrefab: {fileID: 1838291120267913368, guid: 9ba2918e786407043a26e57fb8456bd8, type: 3}
+  shapeList: []
 --- !u!1 &7876598933094056852
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,3 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   enemyPrefab: {fileID: 1838291120267913368, guid: 3f088dd11f5461542ab3175e06926a44, type: 3}
+  sprites:
+  - {fileID: -5427164653334127848, guid: 5ca74fbc65a5e8d3aadbc61afbf59a8b, type: 3}
+  - {fileID: 5092438333008127915, guid: 52293900555e2e3c2be675b1bb8b3fb9, type: 3}
+  - {fileID: 2322061472295505372, guid: 27fee25a478da8917a0bf969301ad309, type: 3}

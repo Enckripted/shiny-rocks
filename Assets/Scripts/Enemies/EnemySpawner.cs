@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private List<Sprite> sprites;
 
     public GameObject SpawnEnemy(EnemyData data, Vector3 position, Vector3 target, Quaternion rotation)
     {
@@ -20,6 +21,8 @@ public class EnemySpawner : MonoBehaviour
             healthTransform.localScale = new Vector3(healthTransform.localScale.x, healthTransform.localScale.y * -1, healthTransform.localScale.z);
             healthTransform.localPosition = new Vector3(0, 0.6f, 0);
         }
+        nObject.GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Count)];
+        Debug.Log("asdf");
         Enemy enemy = nObject.GetComponent<Enemy>();
         enemy.Initialize(data, target);
         return nObject;
