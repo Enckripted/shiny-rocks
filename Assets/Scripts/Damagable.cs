@@ -5,9 +5,13 @@ using UnityEngine.Events;
 public abstract class Damagable : MonoBehaviour
 {
     [SerializeField] private HealthBar healthbar;
+    [SerializeField] private GameObject damageNumberPrefab;
+    [SerializeField] private bool showDamageNumbers;
 
     public float MaxHealth { get; protected set; }
     public float Health { get; protected set; }
+
+    private Canvas uiCanvas;
 
     public UnityEvent OnDeathEvent;
 
@@ -25,6 +29,13 @@ public abstract class Damagable : MonoBehaviour
 
     public void DealDamage(float damage)
     {
+        if (showDamageNumbers)
+        {
+            DamageNumber nDmgNumber = Instantiate(damageNumberPrefab, transform.position, transform.rotation).GetComponent<DamageNumber>();
+            nDmgNumber.damageNum = Math.Floor(damage);
+            //nDmgNumber.GetComponent<RectTransform>().position = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
+        }
+
         Health = Math.Max(Health - damage, 0);
         UpdateHealthbar();
 
@@ -40,5 +51,10 @@ public abstract class Damagable : MonoBehaviour
         UpdateHealthbar();
 
         OnDeathEvent = new UnityEvent();
+    }
+
+    void Start()
+    {
+        uiCanvas = FindAnyObjectByType<Canvas>();
     }
 }

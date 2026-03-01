@@ -110,6 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Mineral
   healthbar: {fileID: 5484540970277534535}
+  damageNumberPrefab: {fileID: 6584957645631030996, guid: 0ae18cabce949c74cb90402e393d4624, type: 3}
+  showDamageNumbers: 0
   OnDeathEvent:
     m_PersistentCalls:
       m_Calls: []
