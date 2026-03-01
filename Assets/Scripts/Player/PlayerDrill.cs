@@ -3,11 +3,24 @@ using UnityEngine;
 
 public class PlayerDrill : Damagable
 {
-    public int InitialHealth;
-    public float DrillSpeed;
-    public float DrillDamage;
-    public float WeaponDamage;
+    public static PlayerDrill instance;
+
+    public double InitialHealth => BaseHealth + UpgradeBuffs.instance.DrillHealthAddition;
+    public double DrillSpeed => BaseDrillSpeed + UpgradeBuffs.instance.DrillSpeedAddition;
+    public double DrillDamage => BaseDrillDamage * UpgradeBuffs.instance.DrillDamageMultiplier;
+    public double WeaponDamage => BaseWeaponDamage * UpgradeBuffs.instance.WeaponDamageMultiplier;
+    public double WeaponRadius => BaseWeaponRadius + UpgradeBuffs.instance.WeaponRadiusAddition;
+    public double WeaponCooldown => BaseWeaponCooldown + UpgradeBuffs.instance.WeaponCooldownAddition;
+
     public float DrillDepth;
+
+    [Header("Base Stats")]
+    public double BaseHealth;
+    public double BaseDrillSpeed;
+    public double BaseDrillDamage;
+    public double BaseWeaponDamage;
+    public double BaseWeaponRadius;
+    public double BaseWeaponCooldown;
 
     [Header("Levels")]
     public int drillHealthLevel;
@@ -29,8 +42,8 @@ public class PlayerDrill : Damagable
 
     private void OnRunBegin()
     {
-        Health = InitialHealth;
-        MaxHealth = InitialHealth;
+        Health = (float)InitialHealth;
+        MaxHealth = (float)InitialHealth;
         DrillDepth = 0;
         UpdateHealthbar();
     }
@@ -40,6 +53,10 @@ public class PlayerDrill : Damagable
         OnDeathEvent.AddListener(StopRun);
         GameManager.instance.runStartEvent.AddListener(OnRunBegin);
         OnRunBegin();
+        Health = (float)InitialHealth;
+        MaxHealth = (float)InitialHealth;
+        UpdateHealthbar();
+        instance = this;
     }
 
     void Update()
@@ -47,7 +64,7 @@ public class PlayerDrill : Damagable
         List<Mineral> remainingMinerals = new List<Mineral>();
         foreach (Mineral mineral in collidingMinerals)
         {
-            mineral.DealDamage(DrillDamage * Time.deltaTime);
+            mineral.DealDamage((float)DrillDamage * Time.deltaTime);
             if (mineral.Health > 0)
                 remainingMinerals.Add(mineral);
         }
@@ -56,7 +73,7 @@ public class PlayerDrill : Damagable
 
         if (IsMoving)
         {
-            DrillDepth += DrillSpeed * Time.deltaTime / 10;
+            DrillDepth += (float)DrillSpeed * Time.deltaTime / 10;
         }
     }
 
@@ -67,7 +84,7 @@ public class PlayerDrill : Damagable
             return;
 
         if (DrillDamage / 10 >= mineral.Health)
-            mineral.DealDamage(DrillDamage);
+            mineral.DealDamage((float)DrillDamage);
         if (mineral.Health > 0)
             collidingMinerals.Add(mineral);
     }
