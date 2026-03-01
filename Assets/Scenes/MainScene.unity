@@ -2826,7 +2826,7 @@ MonoBehaviour:
       m_Calls: []
   InitialHealth: 200
   DrillSpeed: 8
-  DrillDamage: 20
+  DrillDamage: 2
   WeaponDamage: 0
   DrillDepth: 0
   IsMoving: 0
@@ -2864,8 +2864,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 1
+  m_Offset: {x: 0.5, y: 0}
+  m_Radius: 0.5
 --- !u!1001 &1892929215
 PrefabInstance:
   m_ObjectHideFlags: 0
