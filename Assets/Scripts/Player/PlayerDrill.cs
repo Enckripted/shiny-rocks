@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class PlayerDrill : Damagable
 {
     public static PlayerDrill instance;
@@ -33,7 +34,10 @@ public class PlayerDrill : Damagable
     public bool IsMoving;
 
     private Collider2D drillCollider;
+    private AudioSource source;
     private List<Mineral> collidingMinerals = new List<Mineral>();
+
+    [SerializeField] private AudioClip clip;
 
     private void StopRun()
     {
@@ -50,6 +54,7 @@ public class PlayerDrill : Damagable
 
     void Start()
     {
+        source = GetComponent<AudioSource>();
         OnDeathEvent.AddListener(StopRun);
         GameManager.instance.runStartEvent.AddListener(OnRunBegin);
         Health = 1;
@@ -57,6 +62,8 @@ public class PlayerDrill : Damagable
         UpdateHealthbar();
         //OnRunBegin();
         instance = this;
+        source.clip = clip;
+        source.Play();
     }
 
     void Update()
@@ -71,10 +78,12 @@ public class PlayerDrill : Damagable
         collidingMinerals = remainingMinerals;
         IsMoving = collidingMinerals.Count == 0;
 
-        if (IsMoving)
+        if (IsMoving && GameManager.instance.inRun)
         {
             DrillDepth += (float)DrillSpeed * Time.deltaTime / 10;
         }
+
+        source.volume = IsMoving ? 0.25f : 0;
     }
 
     void OnCollisionEnter2D(Collision2D collision)

@@ -1,8 +1,10 @@
 using System.Collections;
+using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(AudioSource))]
 public class WeaponBase : MonoBehaviour
 {
     [SerializeField] private GameObject fireEffect;
@@ -10,21 +12,25 @@ public class WeaponBase : MonoBehaviour
     [SerializeField] private Vector3 mousePos;
     [SerializeField] private Vector3 worldMousePos;
     [SerializeField] public double weaponCooldownTimer;
+    [SerializeField] private AudioClip clip;
 
     [SerializeField] private Sprite weaponReady;
     [SerializeField] private Sprite weaponOnCooldown;
 
     [SerializeField] private Vector3 rotateOffset;
 
+    private AudioSource audioSource;
+
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         fireEffect = transform.Find("FireEffect").gameObject;
     }
 
     void Update()
     {
 
-        if(weaponCooldownTimer > 0)
+        if (weaponCooldownTimer > 0)
         {
             weaponCooldownTimer -= Time.deltaTime;
             transform.Find("Sprite").gameObject.GetComponent<SpriteRenderer>().sprite = weaponOnCooldown;
@@ -44,26 +50,28 @@ public class WeaponBase : MonoBehaviour
 
         //rotate weapon to face mouse pointer
         Vector2 direction = worldMousePos - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;    
-        
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
 
         // Sprite points left, so offset by 180
         angle += 180f;
-        
+
 
         // Clamp the angle relative to sprite’s left direction
         float clampedAngle = angle;//Mathf.Clamp(angle-90, 90f, 270f);
-        if(angle < 280 && angle > 180) clampedAngle = 280;
-        else if(angle > 80 && angle < 180) clampedAngle = 80;
+        if (angle < 280 && angle > 180) clampedAngle = 280;
+        else if (angle > 80 && angle < 180) clampedAngle = 80;
         transform.rotation = Quaternion.Euler(0f, 0f, clampedAngle);
 
         if (Mouse.current.leftButton.wasPressedThisFrame && weaponCooldownTimer <= 0)
         {
+            audioSource.clip = clip;
+            audioSource.Play();
             CircleCast();
             StartCoroutine(PlayFireEffect());
         }
-        
-        
+
+
         worldMousePos.z = 0f;
 
         //set crosshair position
@@ -72,10 +80,11 @@ public class WeaponBase : MonoBehaviour
 
     void CircleCast()
     {
-        if(weaponCooldownTimer <= 0)
+        if (weaponCooldownTimer <= 0)
         {
             weaponCooldownTimer = PlayerDrill.instance.WeaponCooldown;
-        } else
+        }
+        else
         {
             return;
         }
@@ -88,7 +97,7 @@ public class WeaponBase : MonoBehaviour
             layerMask
         );
 
-        for(var i = 0; i < hits.Length; i++)
+        for (var i = 0; i < hits.Length; i++)
         {
             hits[i].collider.gameObject.GetComponent<Enemy>().DealDamage((float)PlayerDrill.instance.WeaponDamage);
         }
@@ -96,8 +105,8 @@ public class WeaponBase : MonoBehaviour
 
     IEnumerator PlayFireEffect()
     {
-        fireEffect.GetComponent<SpriteRenderer>().color = new Color(1,0,0,1);
+        fireEffect.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 1);
         yield return new WaitForSeconds(.2f);
-        fireEffect.GetComponent<SpriteRenderer>().color = new Color(0,0,0,0);
+        fireEffect.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
     }
 }

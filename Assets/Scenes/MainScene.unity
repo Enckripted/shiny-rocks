@@ -706,10 +706,6 @@ PrefabInstance:
       propertyPath: healthbar
       value: 
       objectReference: {fileID: 1341097788}
-    - target: {fileID: 5080446556822409914, guid: 19ceb046e8227754982be750e677735d, type: 3}
-      propertyPath: BaseWeaponRadius
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5788200730267838771, guid: 19ceb046e8227754982be750e677735d, type: 3}
       propertyPath: m_Radius
       value: 0.5
