@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private GameObject healthBarObject;
-    [SerializeField] private TextMeshPro healthText;
+    [SerializeField] private TMP_Text healthText;
 
     public float MaxHealth;
     public float Health;

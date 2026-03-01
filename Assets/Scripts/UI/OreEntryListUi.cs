@@ -5,14 +5,6 @@ public class OreEntryListUi : MonoBehaviour
     [SerializeField] private GameObject oreEntryUiPrefab;
 
     //ai generated
-    // Optional parent for the instantiated entries (defaults to this transform)
-    [SerializeField] private Transform container;
-
-    void Awake()
-    {
-        if (container == null)
-            container = transform;
-    }
 
     void Start()
     {
@@ -26,7 +18,7 @@ public class OreEntryListUi : MonoBehaviour
 
         foreach (MineralData data in minerals)
         {
-            GameObject entryObj = Instantiate(oreEntryUiPrefab, container);
+            GameObject entryObj = Instantiate(oreEntryUiPrefab, transform);
             OreEntryUi entryUi = entryObj.GetComponent<OreEntryUi>();
             if (entryUi == null)
             {
