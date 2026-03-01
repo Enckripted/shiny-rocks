@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public double Money { get; private set; }
+    [field: SerializeField] public double Money { get; private set; }
     private SerializedDictionary<string, int> MineralInventory { get; set; }
 
     //events

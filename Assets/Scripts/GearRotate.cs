@@ -5,11 +5,18 @@ public class GearRotate : MonoBehaviour
 
     [SerializeField] private float rotateSpeed;
 
+    private PlayerDrill playerDrill;
+
+    void Start()
+    {
+        playerDrill = FindFirstObjectByType<PlayerDrill>();
+    }
+
     void Update()
     {
-        if (FindFirstObjectByType<PlayerDrill>().IsMoving)
-        {    
-            gameObject.transform.Rotate(new Vector3(0,0,1*rotateSpeed));
+        if (GameManager.instance.inRun && FindFirstObjectByType<PlayerDrill>().IsMoving)
+        {
+            gameObject.transform.Rotate(new Vector3(0, 0, 1 * rotateSpeed * (float)(playerDrill.DrillSpeed / 4)));
         }
     }
 }
