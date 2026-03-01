@@ -12,7 +12,7 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] private int maxEnemiesAtOnce;
 
     private EnemyData[] allEnemyData;
-    private List<Vector3> lanePositions;
+    private List<Transform> lanePositions;
 
     public static int numOfEnemies;
 
@@ -27,10 +27,10 @@ public class EnemySpawnManager : MonoBehaviour
 
     private void CreateLanesList()
     {
-        lanePositions = new List<Vector3>();
+        lanePositions = new List<Transform>();
         foreach (Transform laneObj in lanesObject.GetComponentsInChildren<Transform>())
         {
-            lanePositions.Add(laneObj.position);
+            lanePositions.Add(laneObj);
         }
         lanePositions.RemoveAt(0); //getcomponentsinchildren counts the object itself as well?
     }
@@ -43,9 +43,10 @@ public class EnemySpawnManager : MonoBehaviour
     private void SpawnEnemyInLane(int lane)
     {
         EnemyData enemyData = GetRandomEnemyData();
-        Vector3 lanePosition = lanePositions[lane];
+        Transform laneTransform = lanePositions[lane];
+        Vector3 lanePosition = laneTransform.position;
         float leftXPosition = mainCamera.transform.position.x - (mainCamera.aspect * mainCamera.orthographicSize);
-        enemySpawner.SpawnEnemy(enemyData, new(leftXPosition, lanePosition.y, lanePosition.z), lanePosition);
+        enemySpawner.SpawnEnemy(enemyData, new(leftXPosition, lanePosition.y, lanePosition.z), lanePosition, laneTransform.rotation);
         numOfEnemies++;
     }
 
