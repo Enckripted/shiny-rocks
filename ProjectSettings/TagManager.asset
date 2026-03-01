@@ -8,6 +8,7 @@ TagManager:
   - PreRunUI
   - GameManager
   - Drill
+  - Enemy
   layers:
   - Default
   - TransparentFX
