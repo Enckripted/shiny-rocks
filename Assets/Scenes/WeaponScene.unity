@@ -972,7 +972,7 @@ Transform:
   m_GameObject: {fileID: 588767443}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1662,6 +1662,8 @@ MonoBehaviour:
   mousePos: {x: 0, y: 0, z: 0}
   worldMousePos: {x: 0, y: 0, z: 0}
   WeaponDamage: 5
+  weaponCooldown: 0
+  weaponCooldownTimer: 0
 --- !u!50 &1052149591
 Rigidbody2D:
   serializedVersion: 5

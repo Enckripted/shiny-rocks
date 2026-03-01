@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,8 @@ public class MouseCircleCast : MonoBehaviour
     [SerializeField] private Vector3 mousePos;
     [SerializeField] private Vector3 worldMousePos;
     [SerializeField] private int WeaponDamage;
+    [SerializeField] private float weaponCooldown;
+    [SerializeField] private float weaponCooldownTimer;
 
     void Awake()
     {
@@ -18,17 +21,13 @@ public class MouseCircleCast : MonoBehaviour
 
     void Update()
     {
+        mousePos = Mouse.current.position.ReadValue();
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             CircleCast();
             StartCoroutine(PlayFireEffect());
         }
-    }
-
-    void CircleCast()
-    {
         // Convert mouse position to world position
-        mousePos = Mouse.current.position.ReadValue();
         worldMousePos = Camera.main.ScreenToWorldPoint(new Vector3(
             mousePos.x,
             mousePos.y,
@@ -36,6 +35,12 @@ public class MouseCircleCast : MonoBehaviour
         ));
         worldMousePos.z = 0f;
 
+        //set crosshair position
+        transform.Find("WeaponCollider").transform.position = worldMousePos;
+    }
+
+    void CircleCast()
+    {
         RaycastHit2D[] hits = Physics2D.CircleCastAll(
             worldMousePos,
             radius,
