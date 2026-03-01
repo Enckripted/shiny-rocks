@@ -5,6 +5,7 @@ public class PlayerDrill : Damagable
     public float DrillSpeed;
     public int InitialHealth;
     public float DrillDamage;
+    public float WeaponDamage;
     public float DrillDepth;
 
     private void StopRun()

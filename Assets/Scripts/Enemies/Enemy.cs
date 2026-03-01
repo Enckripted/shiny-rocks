@@ -7,7 +7,6 @@ public class Enemy : Damagable
 
     private Vector3 targetPosition;
     private Rigidbody2D rb;
-    private bool moving;
 
     public void Initialize(EnemyData data, Vector3 target)
     {
@@ -41,5 +40,11 @@ public class Enemy : Damagable
             return;
         }
         rb.linearVelocity = Vector2.right * Speed;
+
+        if(Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+
     }
 }
