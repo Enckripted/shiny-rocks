@@ -11,7 +11,7 @@ public class ShopUI : MonoBehaviour
     [SerializeField] GameObject PanelRight;
 
     // Master upgrade list (name → value)
-    private Dictionary<string, int> UpgradeList;
+    private Dictionary<string, int> UpgradeList = new();
 
     // Current shop selection (name → value)
     private Dictionary<string, int> CurrentShop = new();
@@ -23,9 +23,6 @@ public class ShopUI : MonoBehaviour
         PanelRight = transform.Find("OptionRight")?.gameObject;
 
         player = FindFirstObjectByType<PlayerDrill>();
-
-        // Initialize upgrade dictionary
-        UpgradeList = new Dictionary<string, int>();
     }
 
     void SetUpgradeList()
@@ -33,8 +30,11 @@ public class ShopUI : MonoBehaviour
         UpgradeList = new Dictionary<string, int>()
         {
             { "Drill Speed", 100 },
-            { "Drill Damage", 100 },
-            { "Weapon Damage", 100 }
+            { "Drill Damage", 200 },
+            { "Drill Health", 200 },
+            { "Weapon Damage", 200 },
+            { "Weapon Cooldown", 300},
+            { "Weapon Radius", 300}
         };
     }
 
@@ -51,8 +51,8 @@ public class ShopUI : MonoBehaviour
         var keys = new List<string>(UpgradeList.Keys);
         Shuffle(keys);
 
-        // Pick up to 3 unique upgrades
-        int itemsToAdd = Mathf.Min(3, keys.Count);
+        // Pick up to 4 unique upgrades
+        int itemsToAdd = Mathf.Min(6, keys.Count);
         for (int i = 0; i < itemsToAdd; i++)
         {
             CurrentShop[keys[i]] = UpgradeList[keys[i]];
@@ -66,9 +66,7 @@ public class ShopUI : MonoBehaviour
         for (int i = 0; i < list.Count; i++)
         {
             int randIndex = Random.Range(i, list.Count);
-            T temp = list[i];
-            list[i] = list[randIndex];
-            list[randIndex] = temp;
+            (list[randIndex], list[i]) = (list[i], list[randIndex]);
         }
     }
 
@@ -78,23 +76,33 @@ public class ShopUI : MonoBehaviour
         var keys = new List<string>(shopItems.Keys);
 
         // Safe filling of panels
-        SetPanelText(PanelLeft, keys, 0);
-        SetPanelText(PanelMiddle, keys, 1);
-        SetPanelText(PanelRight, keys, 2);
+        SetPanel(PanelLeft, keys, 0);
+        SetPanel(PanelMiddle, keys, 1);
+        SetPanel(PanelRight, keys, 2);
     }
 
-    private void SetPanelText(GameObject panel, List<string> keys, int index)
+    private void SetPanel(GameObject panel, List<string> keys, int index)
     {
-        if (panel == null) return;  // panel missing
+        if (panel == null) return;
 
-        var textComp = panel.GetComponentInChildren<TMP_Text>();
-        if (textComp == null)
+        var nameText = panel.transform.Find("OptionText").GetComponent<TMP_Text>();
+        var costText = panel.transform.Find("Cost").GetComponent<TMP_Text>();
+
+        if (index >= keys.Count)
         {
-            Debug.LogWarning($"TMP_Text not found in panel {panel.name}");
+            if (nameText != null) nameText.text = "N/A";
+            if (costText != null) costText.text = "$0";
             return;
         }
 
-        textComp.text = (index < keys.Count) ? keys[index] : "N/A";
+        string upgradeName = keys[index];
+        int price = UpgradeList[upgradeName];
+
+        if (nameText != null)
+            nameText.text = upgradeName;
+
+        if (costText != null)
+            costText.text = "$" + price;
     }
 
     public void ButtonPressed(string buttonName)
@@ -109,14 +117,8 @@ public class ShopUI : MonoBehaviour
 
         if (panel == null) return;
 
-        var textComp = panel.transform.Find("OptionText")?.GetComponent<TMP_Text>();
-        var costComp = panel.transform.Find("Cost")?.GetComponent<TMP_Text>();
-
-        if (textComp == null || costComp == null)
-        {
-            Debug.LogWarning($"Missing OptionText or Cost in {panel.name}");
-            return;
-        }
+        var textComp = panel.transform.Find("OptionText").GetComponent<TMP_Text>();
+        var costComp = panel.transform.Find("Cost").GetComponent<TMP_Text>();
 
         if (!int.TryParse(costComp.text[1..], out int cost))
         {
@@ -129,21 +131,26 @@ public class ShopUI : MonoBehaviour
 
     void BuyUpgrade(string upgradeName, int upgradeCost)
     {
-        Debug.Log($"Buying upgrade: {upgradeName} for {upgradeCost}");
 
         switch (upgradeName)
         {
             case "Drill Speed":
-                player.DrillSpeed += 1; 
+                player.drillSpeedLevel++; 
                 break;
             case "Drill Damage":
-                player.DrillDamage += 1;
+                player.drillDamageLevel++;
+                break;
+            case "Drill Health":
+                player.drillHealthLevel++;
                 break;
             case "Weapon Damage":
-                FindFirstObjectByType<WeaponBase>().WeaponDamage++;
+                player.weaponDamageLevel++;
                 break;
-            default:
-                Debug.LogWarning($"Unknown upgrade: {upgradeName}");
+            case "Drill Cooldown":
+                player.WeaponCooldownLevel++;
+                break;
+            case "Drill Radius":
+                player.weaponRadiusLevel++;
                 break;
         }
     }
