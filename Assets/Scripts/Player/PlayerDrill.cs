@@ -1,11 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerDrill : Damagable
 {
-    public float DrillSpeed;
     public int InitialHealth;
+    public float DrillSpeed;
     public float DrillDamage;
     public float DrillDepth;
+
+    public bool IsMoving;
+
+    private Collider2D drillCollider;
+    private List<Mineral> collidingMinerals = new List<Mineral>();
 
     private void StopRun()
     {
@@ -21,9 +27,37 @@ public class PlayerDrill : Damagable
 
     void Start()
     {
-
         OnDeathEvent.AddListener(StopRun);
         GameManager.instance.runStartEvent.AddListener(OnRunBegin);
         OnRunBegin();
+    }
+
+    void Update()
+    {
+        List<Mineral> remainingMinerals = new List<Mineral>();
+        foreach (Mineral mineral in collidingMinerals)
+        {
+            mineral.DealDamage(DrillDamage * Time.deltaTime);
+            if (mineral.Health > 0)
+                remainingMinerals.Add(mineral);
+        }
+        collidingMinerals = remainingMinerals;
+        IsMoving = collidingMinerals.Count == 0;
+
+        if (IsMoving)
+        {
+            DrillDepth += DrillSpeed * Time.deltaTime / 10;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Mineral mineral = collision.collider.gameObject.GetComponent<Mineral>();
+        if (mineral == null)
+            return;
+
+        mineral.DealDamage(DrillDamage);
+        if (mineral.Health > 0)
+            collidingMinerals.Add(mineral);
     }
 }

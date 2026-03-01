@@ -18,7 +18,7 @@ public class HealthBar : MonoBehaviour
         float percentage = Math.Clamp(Health / MaxHealth, 0.0f, 1.0f);
         healthBarObject.transform.localPosition = originalPos - new Vector3((1 - percentage) / 2.0f, 0.0f, 0.0f);
         healthBarObject.transform.localScale = originalScale - new Vector3(1 - percentage, 0.0f, 0.0f);
-        healthText.text = Health.ToString();
+        healthText.text = Math.Ceiling(Health).ToString();
     }
 
     void Awake()

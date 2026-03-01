@@ -125,4 +125,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MineralSpawnManager
   spawner: {fileID: 0}
-  spawnInterval: 2
+  gameManager: {fileID: 0}
+  spawnDistance: 2

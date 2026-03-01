@@ -6,14 +6,14 @@ public class MineralSpawnManager : MonoBehaviour
 {
     [SerializeField] private MineralSpawner spawner;
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private float spawnInterval = 2f;
+    [SerializeField] private float spawnDistance = 0.5f;
     private Vector2 ySpawnRange = new(-2, 4);
 
     private MineralData[] allMineralData;
     private Camera mainCam;
     private PlayerDrill playerDrill;
 
-    private bool isSpawning = false;
+    private float lastSpawn = 0;
 
     private void LoadAllMineralData()
     {
@@ -41,7 +41,7 @@ public class MineralSpawnManager : MonoBehaviour
             return;
 
         // choose a random mineral type
-        var data = allMineralData[Random.Range(0, allMineralData.Length)];
+        var data = ChooseRandomMineral();
 
         // determine right end of camera position; choose random Y within range
         float x = Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect);
@@ -63,32 +63,18 @@ public class MineralSpawnManager : MonoBehaviour
     {
         //this doesn't work in Awake()
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        gameManager.runStartEvent.AddListener(() =>
+        {
+            lastSpawn = -spawnDistance;
+        });
     }
 
     void Update()
     {
-        //ensures that coroutine will not start again once started
-        //and will not stop again once stopped
-        if (gameManager.inRun && !isSpawning)
+        while (gameManager.inRun && playerDrill.DrillDepth - lastSpawn >= spawnDistance)
         {
-            StartCoroutine(SpawnLoop());
-            isSpawning = true;
-
-        }
-    }
-
-    private IEnumerator SpawnLoop()
-    {
-        while (true)
-        {
-            if (!gameManager.inRun)
-            {
-                isSpawning = false;
-                yield break;
-            }
-
             SpawnRandomMineral();
-            yield return new WaitForSeconds(spawnInterval);
+            lastSpawn += spawnDistance;
         }
     }
 }
