@@ -1,6 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
+
+public struct Cost
+{
+    public double BaseCost;
+    public double CostScale;
+}
 
 public class ShopUI : MonoBehaviour
 {
@@ -11,10 +18,10 @@ public class ShopUI : MonoBehaviour
     [SerializeField] GameObject PanelRight;
 
     // Master upgrade list (name → value)
-    private Dictionary<string, int> UpgradeList = new();
+    private Dictionary<string, Cost> UpgradeList = new();
 
     // Current shop selection (name → value)
-    private Dictionary<string, int> CurrentShop = new();
+    private Dictionary<string, Cost> CurrentShop = new();
 
     void Awake()
     {
@@ -27,18 +34,38 @@ public class ShopUI : MonoBehaviour
 
     void SetUpgradeList()
     {
-        UpgradeList = new Dictionary<string, int>()
+        UpgradeList = new Dictionary<string, Cost>()
         {
-            { "Drill Speed", 100 },
-            { "Drill Damage", 200 },
-            { "Drill Health", 200 },
-            { "Weapon Damage", 200 },
-            { "Weapon Cooldown", 300},
-            { "Weapon Radius", 300}
+            { "Drill Speed", new Cost{ BaseCost = 15, CostScale = 1.15} },
+            { "Drill Damage", new Cost{ BaseCost = 10, CostScale = 1.15} },
+            { "Drill Health", new Cost{ BaseCost = 10, CostScale = 1.15} },
+            { "Weapon Damage", new Cost{ BaseCost = 10, CostScale = 1.15} },
+            { "Weapon Cooldown", new Cost{ BaseCost = 25, CostScale = 1.15}},
+            { "Weapon Radius", new Cost{ BaseCost = 50, CostScale = 1.15}}
         };
     }
 
-    private Dictionary<string, int> SetItems()
+    private double getLevelsFromUpgradeName(string upgradeName)
+    {
+        switch (upgradeName)
+        {
+            case "Drill Speed":
+                return player.drillSpeedLevel;
+            case "Drill Damage":
+                return player.drillDamageLevel;
+            case "Drill Health":
+                return player.drillHealthLevel;
+            case "Weapon Damage":
+                return player.weaponDamageLevel;
+            case "Drill Cooldown":
+                return player.WeaponCooldownLevel;
+            case "Drill Radius":
+                return player.weaponRadiusLevel;
+        }
+        return 0;
+    }
+
+    private Dictionary<string, Cost> SetItems()
     {
         if (UpgradeList == null || UpgradeList.Count == 0)
         {
@@ -65,7 +92,7 @@ public class ShopUI : MonoBehaviour
     {
         for (int i = 0; i < list.Count; i++)
         {
-            int randIndex = Random.Range(i, list.Count);
+            int randIndex = UnityEngine.Random.Range(i, list.Count);
             (list[randIndex], list[i]) = (list[i], list[randIndex]);
         }
     }
@@ -96,7 +123,7 @@ public class ShopUI : MonoBehaviour
         }
 
         string upgradeName = keys[index];
-        int price = UpgradeList[upgradeName];
+        int price = (int)Math.Floor(UpgradeList[upgradeName].BaseCost * Math.Pow(UpgradeList[upgradeName].CostScale, getLevelsFromUpgradeName(upgradeName)));
 
         if (nameText != null)
             nameText.text = upgradeName;
@@ -126,7 +153,11 @@ public class ShopUI : MonoBehaviour
             return;
         }
 
+        if (GameManager.instance.Money < cost)
+            return;
+
         BuyUpgrade(textComp.text, cost);
+        SetShop();
     }
 
     void BuyUpgrade(string upgradeName, int upgradeCost)
@@ -135,7 +166,7 @@ public class ShopUI : MonoBehaviour
         switch (upgradeName)
         {
             case "Drill Speed":
-                player.drillSpeedLevel++; 
+                player.drillSpeedLevel++;
                 break;
             case "Drill Damage":
                 player.drillDamageLevel++;

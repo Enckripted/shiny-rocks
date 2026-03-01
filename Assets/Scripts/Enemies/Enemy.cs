@@ -61,6 +61,6 @@ public class Enemy : Damagable
             return;
         }
         //move slower if the drill is currently moving forward
-        rb.linearVelocity = Vector2.right * Speed + (playerDrill.IsMoving ? Vector2.left * playerDrill.DrillSpeed : Vector2.zero);
+        rb.linearVelocity = Vector2.right * Speed + (playerDrill.IsMoving ? Vector2.left * (float)playerDrill.DrillSpeed : Vector2.zero);
     }
 }

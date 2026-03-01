@@ -6,14 +6,10 @@ using UnityEngine.InputSystem;
 public class WeaponBase : MonoBehaviour
 {
     [SerializeField] private GameObject fireEffect;
-    [SerializeField] private float radius = 0.5f;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private Vector3 mousePos;
     [SerializeField] private Vector3 worldMousePos;
-    [SerializeField] public int WeaponDamage; //public for shop upgrades
-    [SerializeField] public float weaponCooldown;
-    [SerializeField] public float weaponCooldownTimer;
-
+    [SerializeField] public double weaponCooldownTimer;
     [SerializeField] private Sprite weaponReady;
     [SerializeField] private Sprite weaponOnCooldown;
 
@@ -27,7 +23,7 @@ public class WeaponBase : MonoBehaviour
     void Update()
     {
 
-        if(weaponCooldownTimer > 0)
+        if (weaponCooldownTimer > 0)
         {
             weaponCooldownTimer -= Time.deltaTime;
             transform.Find("Sprite").gameObject.GetComponent<SpriteRenderer>().sprite = weaponOnCooldown;
@@ -77,43 +73,33 @@ public class WeaponBase : MonoBehaviour
 
     void CircleCast()
     {
-        if(weaponCooldownTimer <= 0)
+        if (weaponCooldownTimer <= 0)
         {
-            weaponCooldownTimer = weaponCooldown;
-        } else
+            weaponCooldownTimer = PlayerDrill.instance.WeaponCooldown;
+        }
+        else
         {
             return;
         }
 
         RaycastHit2D[] hits = Physics2D.CircleCastAll(
             worldMousePos,
-            radius,
+            (float)PlayerDrill.instance.WeaponRadius,
             Vector2.zero,
             0f,
             layerMask
         );
 
-        for(var i = 0; i < hits.Length; i++)
+        for (var i = 0; i < hits.Length; i++)
         {
-            hits[i].collider.gameObject.GetComponent<Enemy>().DealDamage(WeaponDamage);
+            hits[i].collider.gameObject.GetComponent<Enemy>().DealDamage((float)PlayerDrill.instance.WeaponDamage);
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (Camera.main == null) return;
-
-        Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePos);
-        worldMousePosition.z = 0f;
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(worldMousePosition, radius);
     }
 
     IEnumerator PlayFireEffect()
     {
-        fireEffect.GetComponent<SpriteRenderer>().color = new Color(1,0,0,1);
+        fireEffect.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 1);
         yield return new WaitForSeconds(.2f);
-        fireEffect.GetComponent<SpriteRenderer>().color = new Color(0,0,0,0);
+        fireEffect.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
     }
 }
