@@ -510,7 +510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9f1d389ca99c246892c58e47862513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OreEntryListUi
-  oreEntryUiPrefab: {fileID: 0}
+  oreEntryUiPrefab: {fileID: 6698693746561725159, guid: 796b7a4db8dceba419319b200278a5e4, type: 3}
   container: {fileID: 0}
 --- !u!1 &413503267
 GameObject:

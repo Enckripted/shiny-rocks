@@ -17,6 +17,8 @@ public class Mineral : Damagable
     {
         Health = data.MaxHealth;
         MaxHealth = data.MaxHealth;
+
+        spriteRenderer.color = data.Color;
     }
 
     void Awake()
@@ -44,7 +46,6 @@ public class Mineral : Damagable
         {
             StartCoroutine(MineralRemove());
         }
-
     }
 
     void OnCollisionEnter2D(Collision2D collision)

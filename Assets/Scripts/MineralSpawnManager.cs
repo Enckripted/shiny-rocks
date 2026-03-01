@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MineralSpawnManager : MonoBehaviour
@@ -6,10 +7,11 @@ public class MineralSpawnManager : MonoBehaviour
     [SerializeField] private MineralSpawner spawner;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private float spawnInterval = 2f;
-    private Vector2 ySpawnRange = new(-2,4);
+    private Vector2 ySpawnRange = new(-2, 4);
 
     private MineralData[] allMineralData;
     private Camera mainCam;
+    private PlayerDrill playerDrill;
 
     private bool isSpawning = false;
 
@@ -18,6 +20,19 @@ public class MineralSpawnManager : MonoBehaviour
         allMineralData = Resources.LoadAll<MineralData>("Minerals");
         if (allMineralData == null || allMineralData.Length == 0)
             Debug.LogWarning("No MineralData assets found in Resources/Minerals");
+    }
+
+    private MineralData ChooseRandomMineral()
+    {
+        List<MineralData> options = new List<MineralData>();
+        foreach (MineralData mineralData in allMineralData)
+        {
+            if (mineralData.MinimumDepth <= playerDrill.DrillDepth)
+            {
+                options.Add(mineralData);
+            }
+        }
+        return options[Random.Range(0, options.Count)];
     }
 
     private void SpawnRandomMineral()
@@ -31,8 +46,9 @@ public class MineralSpawnManager : MonoBehaviour
         // determine right end of camera position; choose random Y within range
         float x = Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect);
         float y = Random.Range(ySpawnRange.x, ySpawnRange.y);
+
         //slight offset to x to ensure they spawn off camera
-        Vector3 spawnPos = new(x+3, y, 0f);
+        Vector3 spawnPos = new(x + 3, y, 0f);
         spawner.SpawnMineral(data, spawnPos);
     }
 
@@ -40,6 +56,7 @@ public class MineralSpawnManager : MonoBehaviour
     {
         LoadAllMineralData();
         mainCam = Camera.main;
+        playerDrill = FindFirstObjectByType<PlayerDrill>();
     }
 
     void Start()
@@ -54,17 +71,17 @@ public class MineralSpawnManager : MonoBehaviour
         //and will not stop again once stopped
         if (gameManager.inRun)
         {
-            if(isSpawning == false)
+            if (isSpawning == false)
             {
                 // start the repeating spawn loop
                 StartCoroutine(SpawnLoop());
-                isSpawning = true;   
+                isSpawning = true;
             }
         }
         else
         {
-            if(isSpawning == true)
-            {    
+            if (isSpawning == true)
+            {
                 StopCoroutine(SpawnLoop());
                 isSpawning = false;
             }

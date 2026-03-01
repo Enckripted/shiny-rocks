@@ -5,8 +5,10 @@ using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
     public double Money { get; private set; }
-    public SerializedDictionary<string, int> MineralInventory { get; private set; }
+    private SerializedDictionary<string, int> MineralInventory { get; set; }
 
     //canvas groups
     private CanvasGroup preRunUI;
@@ -15,12 +17,15 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
+
         preRunUI = GameObject.FindGameObjectWithTag("PreRunUI").GetComponent<CanvasGroup>();
         midRunUI = GameObject.FindGameObjectWithTag("MidRunUI").GetComponent<CanvasGroup>();
-        
+
         ShowHomeUI();
         Money = 0;
         MineralInventory = new SerializedDictionary<string, int>();
+
     }
 
     //ai gen zone
@@ -54,7 +59,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void ShowHomeUI()
+    private void ShowHomeUI()
     {
 
         //show home ui, hide mid-run ui
@@ -65,12 +70,10 @@ public class GameManager : MonoBehaviour
         midRunUI.alpha = 0;
         midRunUI.interactable = false;
         midRunUI.blocksRaycasts = false;
-
     }
 
-    public void StartRun()
+    private void ShowRunUI()
     {
-
         //show mid-run ui, hide home ui
         midRunUI.alpha = 1;
         midRunUI.interactable = true;
@@ -79,9 +82,24 @@ public class GameManager : MonoBehaviour
         preRunUI.alpha = 0;
         preRunUI.interactable = false;
         preRunUI.blocksRaycasts = false;
+    }
 
+    public void StartRun()
+    {
+        ShowRunUI();
         inRun = true;
+    }
 
+    //we want to stop the game loop to show the game over screen and cash out
+    public void StopRun()
+    {
+        inRun = false;
+    }
+
+    //and then through clicking cash out we end the run
+    public void EndRun()
+    {
+        ShowHomeUI();
     }
 
 }
