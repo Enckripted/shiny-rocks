@@ -3,16 +3,16 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MouseCircleCast : MonoBehaviour
+public class WeaponBase : MonoBehaviour
 {
     [SerializeField] private GameObject fireEffect;
     [SerializeField] private float radius = 0.5f;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private Vector3 mousePos;
     [SerializeField] private Vector3 worldMousePos;
-    [SerializeField] private int WeaponDamage;
-    [SerializeField] private float weaponCooldown;
-    [SerializeField] private float weaponCooldownTimer;
+    [SerializeField] public int WeaponDamage; //public for shop upgrades
+    [SerializeField] public float weaponCooldown;
+    [SerializeField] public float weaponCooldownTimer;
 
     void Awake()
     {
