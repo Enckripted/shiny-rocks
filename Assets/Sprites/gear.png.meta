@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2dfae028bfa0f2f658d4643ff822733b
+guid: dc5dad0adfb18f94eb71349d49162096
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 254509965974115023
-    second: drill_0
+      213: 9143868440440847147
+    second: gear_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: drill_0
+      name: gear_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 237
-        height: 204
+        width: 51
+        height: 44
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fc21fa13773388300800000000000000
-      internalID: 254509965974115023
+      spriteID: b2bb16976eb85ee70800000000000000
+      internalID: 9143868440440847147
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      drill_0: 254509965974115023
+      gear_0: 9143868440440847147
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

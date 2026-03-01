@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2dfae028bfa0f2f658d4643ff822733b
+guid: ff785d6d842289501a1747a4c4a9d287
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 254509965974115023
-    second: drill_0
+      213: 5082304315730648369
+    second: weaponReady_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: drill_0
+      name: weaponReady_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 237
-        height: 204
+        width: 147
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fc21fa13773388300800000000000000
-      internalID: 254509965974115023
+      spriteID: 13d5f8319d8f78640800000000000000
+      internalID: 5082304315730648369
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      drill_0: 254509965974115023
+      weaponReady_0: 5082304315730648369
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

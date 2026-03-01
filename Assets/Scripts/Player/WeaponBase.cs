@@ -14,6 +14,9 @@ public class WeaponBase : MonoBehaviour
     [SerializeField] public float weaponCooldown;
     [SerializeField] public float weaponCooldownTimer;
 
+    [SerializeField] private Sprite weaponReady;
+    [SerializeField] private Sprite weaponOnCooldown;
+
     void Awake()
     {
         fireEffect = transform.Find("FireEffect").gameObject;
@@ -25,11 +28,11 @@ public class WeaponBase : MonoBehaviour
         if(weaponCooldownTimer > 0)
         {
             weaponCooldownTimer -= Time.deltaTime;
-            transform.Find("Sprite").gameObject.GetComponent<SpriteRenderer>().color = new Color(.5f, .5f, .5f);
+            transform.Find("Sprite").gameObject.GetComponent<SpriteRenderer>().sprite = weaponOnCooldown;
         }
         else
         {
-            transform.Find("Sprite").gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+            transform.Find("Sprite").gameObject.GetComponent<SpriteRenderer>().sprite = weaponReady;
         }
 
         mousePos = Mouse.current.position.ReadValue();
