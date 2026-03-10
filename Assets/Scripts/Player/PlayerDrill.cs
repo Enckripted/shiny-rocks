@@ -32,9 +32,24 @@ public class PlayerDrill : Damagable
     public int WeaponCooldownLevel = 0;
     public int weaponRadiusLevel = 0;
 
+    [Header("Ability Button Variables")]
+    [SerializeField] private double[] abilityTimers; //stores cooldown timer of button; use button number as index
+    Dictionary<string, double> cooldownDict = new Dictionary<string, double>() {
+        //stores cooldown times for abilities, uses ability name as key
+        //timer values are placeholders for now. add ability upgrading later
+        {"Drill Speed", 10.0 },
+        {"Drill Damage", 10.0 },
+        {"Weapon Damage", 10.0 },
+        {"Recharge Time", 10.0 },
+        {"Weapon Overclock", 20.0},
+        {"Ore Doubler", 20.0 }
+    }; 
+
+    [Header("Ability Button Timers")]
+    
+
     public bool IsMoving;
 
-    private Collider2D drillCollider;
     private AudioSource source;
     private List<Mineral> collidingMinerals = new List<Mineral>();
     private ParticleSystem miningParticles;
@@ -62,13 +77,18 @@ public class PlayerDrill : Damagable
         Health = 1;
         MaxHealth = 1;
         UpdateHealthbar();
-        //OnRunBegin();
+
         instance = this;
         source.clip = clip;
         source.Play();
 
         miningParticles = transform.Find("MiningParticles").gameObject.GetComponent<ParticleSystem>();
 
+    }
+    public void AbilityButtonPress(string abilName, int buttonNum)
+    {
+        //set the cooldown timer of the pressed button to the associated cooldown in the cooldown dictionary
+        abilityTimers[buttonNum] = cooldownDict[abilName];
     }
 
     void Update()
@@ -111,4 +131,5 @@ public class PlayerDrill : Damagable
         if (mineral.Health > 0)
             collidingMinerals.Add(mineral);
     }
+
 }
