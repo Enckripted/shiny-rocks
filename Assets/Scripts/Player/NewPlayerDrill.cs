@@ -3,9 +3,9 @@ using UnityEditorInternal;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class PlayerDrill : Damagable
+public class NewPlayerDrill : Damagable
 {
-    public static PlayerDrill instance;
+    public static NewPlayerDrill instance;
 
     public double InitialHealth => BaseHealth + UpgradeBuffs.instance.DrillHealthAddition;
     public double DrillSpeed => BaseDrillSpeed + UpgradeBuffs.instance.DrillSpeedAddition;

@@ -15,4 +15,6 @@ public class EnemyData : ScriptableObject
     public float DamageScaleMult;
     public float SpeedScaleAdd;
     public float AttackSpeedScaleAdd;
+
+    public GameObject EnemyObject;
 }

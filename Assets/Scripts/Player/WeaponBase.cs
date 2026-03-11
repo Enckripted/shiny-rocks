@@ -82,7 +82,7 @@ public class WeaponBase : MonoBehaviour
     {
         if (weaponCooldownTimer <= 0)
         {
-            weaponCooldownTimer = PlayerDrill.instance.WeaponCooldown;
+            weaponCooldownTimer = GameManager.instance.PlayerDrill.WeaponCooldown;
         }
         else
         {
@@ -91,7 +91,7 @@ public class WeaponBase : MonoBehaviour
 
         RaycastHit2D[] hits = Physics2D.CircleCastAll(
             worldMousePos,
-            (float)PlayerDrill.instance.WeaponRadius,
+            (float)GameManager.instance.PlayerDrill.WeaponRadius,
             Vector2.zero,
             0f,
             layerMask
@@ -99,7 +99,7 @@ public class WeaponBase : MonoBehaviour
 
         for (var i = 0; i < hits.Length; i++)
         {
-            hits[i].collider.gameObject.GetComponent<Enemy>().DealDamage((float)PlayerDrill.instance.WeaponDamage);
+            hits[i].collider.gameObject.GetComponent<MeleeEnemy>().DealDamage((float)GameManager.instance.PlayerDrill.WeaponDamage);
         }
     }
 

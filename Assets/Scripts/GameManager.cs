@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent runStopEvent = new UnityEvent();
 
     private ShopUI Shop;
+    [field: SerializeField] public PlayerDrill PlayerDrill { get; private set; }
 
     //canvas groups
     private CanvasGroup preRunUI;
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+
+        PlayerDrill = FindFirstObjectByType<PlayerDrill>();
 
         preRunUI = GameObject.FindGameObjectWithTag("PreRunUI").GetComponent<CanvasGroup>();
         midRunUI = GameObject.FindGameObjectWithTag("MidRunUI").GetComponent<CanvasGroup>();

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Enemy : Damagable
+public class MeleeEnemy : Damagable
 {
     public float Speed { get; private set; }
     public float Damage { get; private set; }

@@ -16,14 +16,27 @@ public class EnemySpawner : MonoBehaviour
             Vector3 localScale = nObject.transform.localScale;
             nObject.transform.localScale = new Vector3(localScale.x * -1, localScale.y, localScale.z);
 
-            Transform healthTransform = nObject.GetComponentInChildren<HealthBar>().gameObject.transform;
-            healthTransform.localScale = new Vector3(healthTransform.localScale.x, healthTransform.localScale.y * -1, healthTransform.localScale.z);
-            healthTransform.localPosition = new Vector3(0, 0.6f, 0);
+            if (nObject.GetComponentInChildren<HealthBar>() != null)
+            {
+                Transform healthTransform = nObject.GetComponentInChildren<HealthBar>().gameObject.transform;
+                healthTransform.localScale = new Vector3(healthTransform.localScale.x, healthTransform.localScale.y * -1, healthTransform.localScale.z);
+                healthTransform.localPosition = new Vector3(0, 0.6f, 0);
+            }
         }
         nObject.GetComponentInChildren<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Count)];
 
-        Enemy enemy = nObject.GetComponent<Enemy>();
-        enemy.Initialize(data, target);
+        //temporary to make sure the addition of abilities doesn't break everything
+        if (nObject.GetComponent<MeleeEnemy>())
+        {
+            MeleeEnemy enemy = nObject.GetComponent<MeleeEnemy>();
+            enemy.Initialize(data, target);
+        }
+        else
+        {
+            NewMeleeEnemy enemy = nObject.GetComponent<NewMeleeEnemy>();
+            enemy.Initialize(data, target);
+        }
+
         return nObject;
     }
 }
