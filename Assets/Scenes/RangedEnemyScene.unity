@@ -8335,10 +8335,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factories
       objectReference: {fileID: 0}
-    - target: {fileID: 6302098460339380785, guid: f25fc1fe3c4e6404382b52904a2586a9, type: 3}
-      propertyPath: enemyPrefab
-      value: 
-      objectReference: {fileID: 1838291120267913368, guid: 3fd3adec593853d4891de46533544c65, type: 3}
     - target: {fileID: 6732607643850471879, guid: f25fc1fe3c4e6404382b52904a2586a9, type: 3}
       propertyPath: shapeList.Array.size
       value: 4

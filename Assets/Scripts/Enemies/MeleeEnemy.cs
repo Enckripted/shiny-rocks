@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
 
-public class MeleeEnemy : Damagable
+[RequireComponent(typeof(Health))]
+public class MeleeEnemy : MonoBehaviour
 {
     public float Speed { get; private set; }
     public float Damage { get; private set; }
@@ -9,22 +10,20 @@ public class MeleeEnemy : Damagable
 
     private Vector3 targetPosition;
     private Rigidbody2D rb;
-    private PlayerDrill playerDrill;
     private SpriteRenderer spriteRenderer;
 
+    private Health health;
     private float lastAttack = 0;
 
     public void Initialize(EnemyData data, Vector3 target)
     {
-        float scaleLevel = (float)Math.Floor(playerDrill.DrillDepth / 10);
+        float scaleLevel = (float)Math.Floor(GameManager.instance.PlayerDrill.DrillDepth / 10);
         float maxHealth = data.MaxHealth * (float)Math.Pow(data.HealthScaleMult, scaleLevel);
 
-        Health = maxHealth;
-        MaxHealth = maxHealth;
+        health.MaxHealth = maxHealth;
         Speed = data.Speed + data.SpeedScaleAdd * scaleLevel;
         Damage = data.Damage + (float)Math.Pow(data.DamageScaleMult, scaleLevel);
         AttackSpeed = data.AttackSpeed - data.AttackSpeedScaleAdd * scaleLevel;
-        UpdateHealthbar();
 
         targetPosition = target;
     }
@@ -32,13 +31,13 @@ public class MeleeEnemy : Damagable
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        playerDrill = FindFirstObjectByType<PlayerDrill>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        health = GetComponent<Health>();
     }
 
     void Update()
     {
-        if (Health <= 0 || !GameManager.instance.inRun || !spriteRenderer.isVisible)
+        if (health.CurrentHealth <= 0 || !GameManager.instance.inRun || !spriteRenderer.isVisible)
         {
             EnemySpawnManager.numOfEnemies--;
             Destroy(gameObject);
@@ -54,13 +53,13 @@ public class MeleeEnemy : Damagable
             //attack
             if (Time.fixedTime - lastAttack >= AttackSpeed)
             {
-                playerDrill.DealDamage(Damage);
+                GameManager.instance.PlayerDrill.DealDamage(Damage);
                 lastAttack = Time.fixedTime;
             }
 
             return;
         }
         //move slower if the drill is currently moving forward
-        rb.linearVelocity = Vector2.right * Speed + (playerDrill.IsMoving ? Vector2.left * (float)playerDrill.DrillSpeed : Vector2.zero);
+        rb.linearVelocity = Vector2.right * Speed + (GameManager.instance.PlayerDrill.IsMoving ? Vector2.left * (float)GameManager.instance.PlayerDrill.DrillSpeed : Vector2.zero);
     }
 }

@@ -26,16 +26,8 @@ public class EnemySpawner : MonoBehaviour
         nObject.GetComponentInChildren<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Count)];
 
         //temporary to make sure the addition of abilities doesn't break everything
-        if (nObject.GetComponent<MeleeEnemy>())
-        {
-            MeleeEnemy enemy = nObject.GetComponent<MeleeEnemy>();
-            enemy.Initialize(data, target);
-        }
-        else
-        {
-            NewMeleeEnemy enemy = nObject.GetComponent<NewMeleeEnemy>();
-            enemy.Initialize(data, target);
-        }
+        MeleeEnemy enemy = nObject.GetComponent<MeleeEnemy>();
+        enemy.Initialize(data, target);
 
         return nObject;
     }

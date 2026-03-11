@@ -17,8 +17,9 @@ MonoBehaviour:
   Damage: 8
   Speed: 6
   AttackSpeed: 1
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 2800000, guid: 5ca74fbc65a5e8d3aadbc61afbf59a8b, type: 3}
   HealthScaleMult: 1.1
   DamageScaleMult: 1.1
   SpeedScaleAdd: 0.1
   AttackSpeedScaleAdd: 0.05
+  EnemyObject: {fileID: 1838291120267913368, guid: 3f088dd11f5461542ab3175e06926a44, type: 3}

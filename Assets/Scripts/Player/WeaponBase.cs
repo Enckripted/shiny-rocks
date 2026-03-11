@@ -19,6 +19,8 @@ public class WeaponBase : MonoBehaviour
 
     [SerializeField] private Vector3 rotateOffset;
 
+    [SerializeField] private string enemyLayerName;
+
     private AudioSource audioSource;
 
     void Awake()
@@ -99,7 +101,21 @@ public class WeaponBase : MonoBehaviour
 
         for (var i = 0; i < hits.Length; i++)
         {
-            hits[i].collider.gameObject.GetComponent<MeleeEnemy>().DealDamage((float)GameManager.instance.PlayerDrill.WeaponDamage);
+            GameObject obj = hits[i].collider.gameObject;
+
+            if (obj.layer != LayerMask.NameToLayer(enemyLayerName))
+            {
+                continue;
+            }
+
+            //this is an enemy for sure
+            Health health = obj.GetComponent<Health>();
+            if (health == null)
+            {
+                UnityEngine.Debug.LogError("Found an object with an enemy tag but no health component");
+                continue;
+            }
+            health.TakeDamage((float)GameManager.instance.PlayerDrill.WeaponDamage);
         }
     }
 

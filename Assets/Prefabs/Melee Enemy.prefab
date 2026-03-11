@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6120853930442637271}
   - component: {fileID: 5505909858424052149}
-  - component: {fileID: 8992032313264135798}
+  - component: {fileID: 3221090026715515850}
   - component: {fileID: 2662460107002106218}
   - component: {fileID: 3999081353411525707}
   m_Layer: 3
@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Health
   MaxHealth: 0
   <CurrentHealth>k__BackingField: 0
---- !u!114 &8992032313264135798
+--- !u!114 &3221090026715515850
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,11 +60,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1838291120267913368}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb2a8d4b6d524774a8042fa5552b415c, type: 3}
+  m_Script: {fileID: 11500000, guid: a3ec3a2470276044995b55970b2d6ec7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NewMeleeEnemy
-  health: {fileID: 5505909858424052149}
-  healthBar: {fileID: 8986700874238470128}
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeEnemy
 --- !u!50 &2662460107002106218
 Rigidbody2D:
   serializedVersion: 5
@@ -277,6 +275,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6279804080724865611, guid: ca6858296d1d47d4ba8052535b27ad89, type: 3}
+      propertyPath: health
+      value: 
+      objectReference: {fileID: 5505909858424052149}
     - target: {fileID: 6943961867042321884, guid: ca6858296d1d47d4ba8052535b27ad89, type: 3}
       propertyPath: m_Name
       value: New Health Bar
@@ -291,14 +293,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 704793821091668371, guid: ca6858296d1d47d4ba8052535b27ad89, type: 3}
   m_PrefabInstance: {fileID: 3139418366575007163}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8986700874238470128 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6279804080724865611, guid: ca6858296d1d47d4ba8052535b27ad89, type: 3}
-  m_PrefabInstance: {fileID: 3139418366575007163}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0beac6c21c954ac4cae4a1f8eea3e35c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NewHealthBar
