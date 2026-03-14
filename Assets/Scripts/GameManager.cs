@@ -110,6 +110,7 @@ public class GameManager : MonoBehaviour
 
     public void StartRun()
     {
+        Debug.Log("start run");
         ShowRunUI();
         inRun = true;
         MineralInventory = new SerializedDictionary<string, int>();

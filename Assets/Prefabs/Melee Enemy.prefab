@@ -63,6 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3ec3a2470276044995b55970b2d6ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeEnemy
+  spriteRenderer: {fileID: 4256143980246744868}
 --- !u!50 &2662460107002106218
 Rigidbody2D:
   serializedVersion: 5

@@ -665,57 +665,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63609629}
   m_CullTransparentMesh: 1
---- !u!1 &66169918 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7915992724744660047, guid: 19ceb046e8227754982be750e677735d, type: 3}
-  m_PrefabInstance: {fileID: 408330492}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &66169923
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 66169918}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: -0.08649859, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1.4306524, y: 1}
-  m_EdgeRadius: 0
 --- !u!1001 &72886521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1727,10 +1676,6 @@ PrefabInstance:
       propertyPath: healthbar
       value: 
       objectReference: {fileID: 1341097788}
-    - target: {fileID: 5080446556822409914, guid: 19ceb046e8227754982be750e677735d, type: 3}
-      propertyPath: BaseWeaponRadius
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5788200730267838771, guid: 19ceb046e8227754982be750e677735d, type: 3}
       propertyPath: m_Radius
       value: 0.5
@@ -1743,14 +1688,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6740056905704138423, guid: 19ceb046e8227754982be750e677735d, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7915992724744660047, guid: 19ceb046e8227754982be750e677735d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 66169923}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19ceb046e8227754982be750e677735d, type: 3}
 --- !u!1 &438984422
 GameObject:

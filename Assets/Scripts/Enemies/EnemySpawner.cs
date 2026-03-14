@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
 
     public GameObject SpawnEnemy(EnemyData data, Vector3 position, Vector3 target, Quaternion rotation)
     {
-        GameObject nObject = Instantiate(enemyPrefab);
+        GameObject nObject = Instantiate(data.EnemyObject);
         nObject.transform.position = position;
         nObject.transform.rotation = rotation;
         if (nObject.transform.rotation != Quaternion.identity)
@@ -25,9 +25,18 @@ public class EnemySpawner : MonoBehaviour
         }
         nObject.GetComponentInChildren<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Count)];
 
-        //temporary to make sure the addition of abilities doesn't break everything
-        MeleeEnemy enemy = nObject.GetComponent<MeleeEnemy>();
-        enemy.Initialize(data, target);
+        //temporary, please don't do this later
+        if (nObject.GetComponent<MeleeEnemy>() != null)
+        {
+            MeleeEnemy enemy = nObject.GetComponent<MeleeEnemy>();
+            enemy.Initialize(data, target);
+        }
+        else
+        {
+            RangedEnemy enemy = nObject.GetComponent<RangedEnemy>();
+            enemy.Initialize(data, target);
+        }
+
 
         return nObject;
     }
