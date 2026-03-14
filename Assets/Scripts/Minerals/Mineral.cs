@@ -27,8 +27,8 @@ public class Mineral : MonoBehaviour
 
     public void DestroyMineral()
     {
-        transform.Find("Sprite").gameObject.GetComponent<SpriteRenderer>().color = new(0, 0, 0, 0);
-        //transform.Find("Health Bar").gameObject.SetActive(false);
+        mineralSpriteRenderer.color = new(0, 0, 0, 0);
+        health.gameObject.SetActive(false);
         hitEffect.Play();
         GameManager.instance.AddMineral(MineralName, 1);
         //source.clip = clip;
