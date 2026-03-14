@@ -37,7 +37,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     private EnemyData GetRandomEnemyData()
     {
-        return allEnemyData[Random.Range(0, allEnemyData.Count<EnemyData>() - 1)];
+        return allEnemyData[Random.Range(0, allEnemyData.Length)];
     }
 
     private void SpawnEnemyInLane(int lane)
@@ -70,7 +70,10 @@ public class EnemySpawnManager : MonoBehaviour
         while (true)
         {
             if (!GameManager.instance.inRun)
+            {
                 yield return new WaitForEndOfFrame();
+                continue;
+            }
 
             if (numOfEnemies < maxEnemiesAtOnce)
                 SpawnEnemyInRandLane();

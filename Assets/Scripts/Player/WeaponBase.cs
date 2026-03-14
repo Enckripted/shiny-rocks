@@ -19,6 +19,8 @@ public class WeaponBase : MonoBehaviour
 
     [SerializeField] private Vector3 rotateOffset;
 
+    [SerializeField] private string enemyLayerName;
+
     private AudioSource audioSource;
 
     void Awake()
@@ -82,7 +84,7 @@ public class WeaponBase : MonoBehaviour
     {
         if (weaponCooldownTimer <= 0)
         {
-            weaponCooldownTimer = PlayerDrill.instance.WeaponCooldown;
+            weaponCooldownTimer = GameManager.instance.PlayerDrill.WeaponCooldown;
         }
         else
         {
@@ -91,7 +93,7 @@ public class WeaponBase : MonoBehaviour
 
         RaycastHit2D[] hits = Physics2D.CircleCastAll(
             worldMousePos,
-            (float)PlayerDrill.instance.WeaponRadius,
+            (float)GameManager.instance.PlayerDrill.WeaponRadius,
             Vector2.zero,
             0f,
             layerMask
@@ -99,7 +101,21 @@ public class WeaponBase : MonoBehaviour
 
         for (var i = 0; i < hits.Length; i++)
         {
-            hits[i].collider.gameObject.GetComponent<Enemy>().DealDamage((float)PlayerDrill.instance.WeaponDamage);
+            GameObject obj = hits[i].collider.gameObject;
+
+            if (obj.layer != LayerMask.NameToLayer(enemyLayerName))
+            {
+                continue;
+            }
+
+            //this is an enemy for sure
+            Health health = obj.GetComponent<Health>();
+            if (health == null)
+            {
+                UnityEngine.Debug.LogError("Found an object with an enemy tag but no health component");
+                continue;
+            }
+            health.TakeDamage((float)GameManager.instance.PlayerDrill.WeaponDamage);
         }
     }
 
