@@ -1,22 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
     [SerializeField] private EnemySpawner enemySpawner;
-    [SerializeField] private GameObject lanesObject;
+    [SerializeField] private GameObject lowestSpawnLocation;
+    [SerializeField] private GameObject highestSpawnLocation;
+    [SerializeField] private GameObject enemyMeleeLocation;
 
     [SerializeField] private float spawnInterval;
     [SerializeField] private int maxEnemiesAtOnce;
 
-    private EnemyData[] allEnemyData;
-    private List<Transform> lanePositions;
+    [SerializeField] private float overlapCheckRadius;
+    [SerializeField] private LayerMask overlapLayerMask;
 
-    public static int numOfEnemies;
+    private EnemyData[] allEnemyData;
+
+    public static int numOfEnemies = 0;
 
     private Camera mainCamera;
+
+    private void DecrementEnemies()
+    {
+        numOfEnemies--;
+    }
 
     private void GetAllEnemyData()
     {
@@ -25,14 +35,23 @@ public class EnemySpawnManager : MonoBehaviour
             Debug.LogWarning("No EnemyData assets found in Resources/Enemies");
     }
 
-    private void CreateLanesList()
+    private Vector3 GetRandEnemySpawnPos()
     {
-        lanePositions = new List<Transform>();
-        foreach (Transform laneObj in lanesObject.GetComponentsInChildren<Transform>())
-        {
-            lanePositions.Add(laneObj);
-        }
-        lanePositions.RemoveAt(0); //getcomponentsinchildren counts the object itself as well?
+        Vector3 lowPos = lowestSpawnLocation.transform.position;
+        Vector3 highPos = highestSpawnLocation.transform.position;
+        return lowPos + new Vector3(0, Random.Range(0f, highPos.y - lowPos.y));
+    }
+
+    private bool IsPosValidSpawnPos(Vector3 location)
+    {
+        Collider2D collider = Physics2D.OverlapCircle(location, overlapCheckRadius, overlapLayerMask);
+        Debug.Log(collider);
+        return collider == null;
+    }
+
+    private Vector3 GetTargetFromStartPos(Vector3 startPos)
+    {
+        return new Vector3(enemyMeleeLocation.transform.position.x, startPos.y, startPos.z);
     }
 
     private EnemyData GetRandomEnemyData()
@@ -40,20 +59,21 @@ public class EnemySpawnManager : MonoBehaviour
         return allEnemyData[Random.Range(0, allEnemyData.Length)];
     }
 
-    private void SpawnEnemyInLane(int lane)
+    private void AttemptSpawnEnemy()
     {
-        EnemyData enemyData = GetRandomEnemyData();
-        Transform laneTransform = lanePositions[lane];
-        Vector3 lanePosition = laneTransform.position;
-        float leftXPosition = mainCamera.transform.position.x - (mainCamera.aspect * mainCamera.orthographicSize);
-        enemySpawner.SpawnEnemy(enemyData, new(leftXPosition, lanePosition.y, lanePosition.z), lanePosition, laneTransform.rotation);
-        numOfEnemies++;
-    }
+        Vector3 spawnPos = GetRandEnemySpawnPos();
+        if (numOfEnemies >= maxEnemiesAtOnce || !IsPosValidSpawnPos(spawnPos))
+        {
+            return;
+        }
 
-    private void SpawnEnemyInRandLane()
-    {
-        int index = Random.Range(0, lanePositions.Count);
-        SpawnEnemyInLane(index);
+        EnemyData enemyData = GetRandomEnemyData();
+        Vector3 targetPos = GetTargetFromStartPos(spawnPos);
+        GameObject enemyObj = enemySpawner.SpawnEnemy(enemyData, spawnPos, targetPos);
+        BaseEnemy enemy = enemyObj.GetComponent<BaseEnemy>();
+        numOfEnemies++;
+        //this will also take care of numOfEnemies when everything gets cleaned up on run end
+        enemy.OnDeathEvent += DecrementEnemies;
     }
 
     void Start()
@@ -61,7 +81,6 @@ public class EnemySpawnManager : MonoBehaviour
         mainCamera = Camera.main;
 
         GetAllEnemyData();
-        CreateLanesList();
         StartCoroutine(SpawnLoop());
     }
 
@@ -75,8 +94,7 @@ public class EnemySpawnManager : MonoBehaviour
                 continue;
             }
 
-            if (numOfEnemies < maxEnemiesAtOnce)
-                SpawnEnemyInRandLane();
+            AttemptSpawnEnemy();
             yield return new WaitForSeconds(spawnInterval);
         }
     }
