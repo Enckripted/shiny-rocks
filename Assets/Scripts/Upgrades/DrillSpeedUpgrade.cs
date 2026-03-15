@@ -7,7 +7,7 @@ public class DrillSpeedUpgrade : Upgrade
 
     public override PlayerStats ApplyEffect(PlayerStats curStats)
     {
-        curStats.BaseDrillSpeed += SpeedPerLevel * Level;
+        curStats.DrillSpeed += SpeedPerLevel * Level;
         return curStats;
     }
 }

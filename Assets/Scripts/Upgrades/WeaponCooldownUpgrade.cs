@@ -7,7 +7,7 @@ public class WeaponCooldownUpgrade : Upgrade
 
     public override PlayerStats ApplyEffect(PlayerStats curStats)
     {
-        curStats.BaseWeaponCooldown = Math.Max(0.01, curStats.BaseWeaponCooldown - CooldownReductionPerLevel * Level);
+        curStats.WeaponCooldown = Math.Max(0.01, curStats.WeaponCooldown - CooldownReductionPerLevel * Level);
         return curStats;
     }
 }

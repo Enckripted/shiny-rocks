@@ -84,7 +84,7 @@ public class WeaponBase : MonoBehaviour
     {
         if (weaponCooldownTimer <= 0)
         {
-            weaponCooldownTimer = GameManager.instance.PlayerDrill.WeaponCooldown;
+            weaponCooldownTimer = GameManager.instance.PlayerDrill.DrillStats.WeaponCooldown;
         }
         else
         {
@@ -93,7 +93,7 @@ public class WeaponBase : MonoBehaviour
 
         RaycastHit2D[] hits = Physics2D.CircleCastAll(
             worldMousePos,
-            (float)GameManager.instance.PlayerDrill.WeaponRadius,
+            (float)GameManager.instance.PlayerDrill.DrillStats.WeaponRadius,
             Vector2.zero,
             0f,
             layerMask
@@ -115,7 +115,7 @@ public class WeaponBase : MonoBehaviour
                 UnityEngine.Debug.LogError("Found an object with an enemy tag but no health component");
                 continue;
             }
-            health.TakeDamage((float)GameManager.instance.PlayerDrill.WeaponDamage);
+            health.TakeDamage((float)GameManager.instance.PlayerDrill.DrillStats.WeaponDamage);
         }
     }
 

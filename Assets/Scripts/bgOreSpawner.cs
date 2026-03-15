@@ -29,7 +29,7 @@ public class bgOreSpawner : MonoBehaviour
                 StartCoroutine(OreSpawn());
                 coroutineStarted = true;
             }
-            transform.Translate(Vector3.left * (float)playerDrill.DrillSpeed * Time.deltaTime, Space.World);
+            transform.Translate(Vector3.left * (float)playerDrill.DrillStats.DrillSpeed * Time.deltaTime, Space.World);
         }
 
         // destroy once it is no longer visible by any camera

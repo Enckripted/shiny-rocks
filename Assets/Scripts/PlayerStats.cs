@@ -3,10 +3,10 @@ using System;
 [Serializable]
 public struct PlayerStats
 {
-    public double BaseHealth;
-    public double BaseDrillSpeed;
-    public double BaseDrillDamage;
-    public double BaseWeaponDamage;
-    public double BaseWeaponRadius;
-    public double BaseWeaponCooldown;
+    public double InitialHealth;
+    public double DrillSpeed;
+    public double DrillDamage;
+    public double WeaponDamage;
+    public double WeaponRadius;
+    public double WeaponCooldown;
 }

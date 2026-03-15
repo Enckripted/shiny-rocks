@@ -7,7 +7,7 @@ public class WeaponDamageUpgrade : Upgrade
 
     public override PlayerStats ApplyEffect(PlayerStats curStats)
     {
-        curStats.BaseWeaponDamage *= Math.Pow(DamageMultiplierPerLevel, Level);
+        curStats.WeaponDamage *= Math.Pow(DamageMultiplierPerLevel, Level);
         return curStats;
     }
 }

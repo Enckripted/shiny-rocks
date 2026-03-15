@@ -7,7 +7,7 @@ public class DrillHealthUpgrade : Upgrade
 
     public override PlayerStats ApplyEffect(PlayerStats curStats)
     {
-        curStats.BaseHealth += HealthPerLevel * Level;
+        curStats.InitialHealth += HealthPerLevel * Level;
         return curStats;
     }
 }

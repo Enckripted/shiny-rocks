@@ -7,7 +7,7 @@ public class WeaponRadiusUpgrade : Upgrade
 
     public override PlayerStats ApplyEffect(PlayerStats curStats)
     {
-        curStats.BaseWeaponRadius += RadiusPerLevel * Level;
+        curStats.WeaponRadius += RadiusPerLevel * Level;
         return curStats;
     }
 }

@@ -10,33 +10,10 @@ public class PlayerDrill : MonoBehaviour
 {
     public static PlayerDrill instance;
 
-    public double InitialHealth => BaseHealth + UpgradeBuffs.instance.DrillHealthAddition;
-    public double DrillSpeed => BaseDrillSpeed + UpgradeBuffs.instance.DrillSpeedAddition;
-    public double DrillDamage => BaseDrillDamage * UpgradeBuffs.instance.DrillDamageMultiplier;
-    public double WeaponDamage => BaseWeaponDamage * UpgradeBuffs.instance.WeaponDamageMultiplier;
-    public double WeaponRadius => BaseWeaponRadius + UpgradeBuffs.instance.WeaponRadiusAddition;
-    public double WeaponCooldown => BaseWeaponCooldown + UpgradeBuffs.instance.WeaponCooldownAddition;
-
     public float DrillDepth;
 
     public PlayerStats BaseDrillStats;
     public PlayerStats DrillStats => UpgradeManager.instance.CalculateEffects(BaseDrillStats);
-
-    [Header("Base Stats")]
-    public double BaseHealth;
-    public double BaseDrillSpeed;
-    public double BaseDrillDamage;
-    public double BaseWeaponDamage;
-    public double BaseWeaponRadius;
-    public double BaseWeaponCooldown;
-
-    [Header("Levels")]
-    public int drillHealthLevel = 0;
-    public int drillSpeedLevel = 0;
-    public int drillDamageLevel = 0;
-    public int weaponDamageLevel = 0;
-    public int WeaponCooldownLevel = 0;
-    public int weaponRadiusLevel = 0;
 
     [Header("Ability Button Variables")]
     [SerializeField] private GameObject buttonPanel;
@@ -73,7 +50,7 @@ public class PlayerDrill : MonoBehaviour
 
     private void OnRunBegin()
     {
-        health.SetMaxHealth((float)InitialHealth);
+        health.SetMaxHealth((float)DrillStats.InitialHealth);
 
         DrillDepth = 0;
 
@@ -148,7 +125,7 @@ public class PlayerDrill : MonoBehaviour
         foreach (Mineral mineral in collidingMinerals)
         {
             Health mineralHealth = mineral.GetComponent<Health>();
-            mineralHealth.TakeDamage((float)DrillDamage * Time.deltaTime);
+            mineralHealth.TakeDamage((float)DrillStats.DrillDamage * Time.deltaTime);
 
             if (mineralHealth.CurrentHealth > 0)
                 remainingMinerals.Add(mineral);
@@ -158,7 +135,7 @@ public class PlayerDrill : MonoBehaviour
 
         if (IsMoving && GameManager.instance.inRun)
         {
-            DrillDepth += (float)DrillSpeed * Time.deltaTime / 10;
+            DrillDepth += (float)DrillStats.DrillSpeed * Time.deltaTime / 10;
             if (miningParticles.isPlaying == false)
             {
                 miningParticles.Play();
@@ -198,8 +175,8 @@ public class PlayerDrill : MonoBehaviour
             return;
 
         Health mineralHealth = mineral.GetComponent<Health>();
-        if (DrillDamage / 10 >= mineralHealth.CurrentHealth)
-            mineralHealth.TakeDamage((float)DrillDamage);
+        if (DrillStats.DrillDamage / 10 >= mineralHealth.CurrentHealth)
+            mineralHealth.TakeDamage((float)DrillStats.DrillDamage);
         if (mineralHealth.CurrentHealth > 0)
             collidingMinerals.Add(mineral);
     }

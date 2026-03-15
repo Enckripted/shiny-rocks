@@ -27,5 +27,6 @@ public class UpgradeManager : MonoBehaviour
     void Start()
     {
         Upgrades = new List<Upgrade>(upgradesObject.GetComponentsInChildren<Upgrade>());
+        Debug.Log("upgrades init");
     }
 }

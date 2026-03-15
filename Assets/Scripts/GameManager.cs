@@ -22,21 +22,6 @@ public class GameManager : MonoBehaviour
     private CanvasGroup midRunUI;
     public bool inRun = false;
 
-    void Awake()
-    {
-        instance = this;
-
-        PlayerDrill = FindFirstObjectByType<PlayerDrill>();
-
-        preRunUI = GameObject.FindGameObjectWithTag("PreRunUI").GetComponent<CanvasGroup>();
-        midRunUI = GameObject.FindGameObjectWithTag("MidRunUI").GetComponent<CanvasGroup>();
-        Shop = FindFirstObjectByType<ShopUI>();
-
-        ShowHomeUI();
-        Money = 0;
-        MineralInventory = new SerializedDictionary<string, int>();
-    }
-
     //ai gen zone
     public void AddMoney(double amount)
     {
@@ -130,4 +115,23 @@ public class GameManager : MonoBehaviour
         ShowHomeUI();
     }
 
+    void Awake()
+    {
+        instance = this;
+
+        PlayerDrill = FindFirstObjectByType<PlayerDrill>();
+
+        preRunUI = GameObject.FindGameObjectWithTag("PreRunUI").GetComponent<CanvasGroup>();
+        midRunUI = GameObject.FindGameObjectWithTag("MidRunUI").GetComponent<CanvasGroup>();
+        Shop = FindFirstObjectByType<ShopUI>();
+
+        Money = 0;
+        MineralInventory = new SerializedDictionary<string, int>();
+    }
+
+    void Start()
+    {
+        Debug.Log("next");
+        ShowHomeUI();
+    }
 }

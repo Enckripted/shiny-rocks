@@ -7,7 +7,7 @@ public class DrillDamageUpgrade : Upgrade
 
     public override PlayerStats ApplyEffect(PlayerStats curStats)
     {
-        curStats.BaseDrillDamage *= Math.Pow(DamageMultiplierPerLevel, Level);
+        curStats.DrillDamage *= Math.Pow(DamageMultiplierPerLevel, Level);
         return curStats;
     }
 }
