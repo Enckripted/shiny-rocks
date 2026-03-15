@@ -4746,7 +4746,7 @@ MonoBehaviour:
   highestSpawnLocation: {fileID: 496803132}
   enemyMeleeLocation: {fileID: 2020890882}
   spawnInterval: 0.5
-  maxEnemiesAtOnce: 10
+  maxEnemiesAtOnce: 2
   overlapCheckRadius: 1
   overlapLayerMask:
     serializedVersion: 2

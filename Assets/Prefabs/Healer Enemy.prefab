@@ -137,10 +137,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealerEnemy
   spriteRenderer: {fileID: 4256143980246744868}
-  healRadius: 2
+  healRadius: 3
   xDisplacementRange: 10
   yDisplacementRange: 2
   distanceForSuccesfulMove: 0.5
+  healBubblePrefab: {fileID: 6848185327085162436, guid: b2c7ad9968b24bd41adbf245576f2d5e, type: 3}
   layerMask:
     serializedVersion: 2
     m_Bits: 8

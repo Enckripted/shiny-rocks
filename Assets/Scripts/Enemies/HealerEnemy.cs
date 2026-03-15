@@ -8,6 +8,7 @@ public class HealerEnemy : BaseEnemy
     [SerializeField] private float xDisplacementRange = 10f;
     [SerializeField] private float yDisplacementRange = 1f;
     [SerializeField] private float distanceForSuccesfulMove = 0.1f;
+    [SerializeField] private GameObject healBubblePrefab;
 
     [SerializeField] private LayerMask layerMask;
 
@@ -20,6 +21,31 @@ public class HealerEnemy : BaseEnemy
             -Random.Range(0, xDisplacementRange), Random.Range(-yDisplacementRange, yDisplacementRange), 0
         );
         return pos;
+    }
+
+    private void DoBubbleAnimation()
+    {
+        GameObject healBubbleObj = Instantiate(healBubblePrefab, transform.position, Quaternion.identity);
+        healBubbleObj.transform.localScale *= healRadius;
+    }
+
+    private List<Health> GetNearbyEnemyHealths()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, healRadius, layerMask);
+        List<Health> result = new();
+
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.gameObject.GetComponent<BaseEnemy>() == null || collider.gameObject == gameObject)
+            {
+                continue;
+            }
+
+            Health health = collider.gameObject.GetComponent<Health>();
+            result.Add(health);
+        }
+
+        return result;
     }
 
     public override void Initialize(EnemyData data, Vector3 targetPos)
@@ -36,26 +62,15 @@ public class HealerEnemy : BaseEnemy
 
     protected override void Attack()
     {
-        Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, healRadius, layerMask);
+        List<Health> healths = GetNearbyEnemyHealths();
+        if (healths.Count == 0)
+            return;
 
-        int hits = 0;
-        foreach (Collider2D collider in results)
+        foreach (Health health in healths)
         {
-            if (collider.gameObject.GetComponent<BaseEnemy>() == null)
-            {
-                continue;
-            }
-
-            Health health = collider.gameObject.GetComponent<Health>();
-            health.Heal(health.MaxHealth / 5);
-            hits++;
+            health.Heal(Damage);
         }
-
-        if (hits > 0)
-        {
-            Debug.Log($"casted heal on {hits} targets");
-            //StartCoroutine(HealBubbleAnimation());
-        }
+        DoBubbleAnimation();
     }
 
     protected override void DoMovement()
@@ -72,10 +87,4 @@ public class HealerEnemy : BaseEnemy
     {
         DoMovement();
     }
-
-    /*
-    IEnumerator HealBubbleAnimation()
-    {
-        //yield return null;
-    }*/
 }
