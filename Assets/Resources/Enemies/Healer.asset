@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca91e7f900381dd44ac5f29aa93850f5, type: 3}
-  m_Name: Ranged
+  m_Name: Healer
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  <Name>k__BackingField: Ranged
+  <Name>k__BackingField: Healer
   <MaxHealth>k__BackingField: 10
   <Damage>k__BackingField: 2
   <Speed>k__BackingField: 3
   <AttackSpeed>k__BackingField: 1
   <Sprite>k__BackingField:
-  - {fileID: 2800000, guid: 52293900555e2e3c2be675b1bb8b3fb9, type: 3}
+  - {fileID: 10904, guid: 0000000000000000f000000000000000, type: 0}
   <HealthScaleMult>k__BackingField: 1.1
   <DamageScaleMult>k__BackingField: 1.1
   <SpeedScaleAdd>k__BackingField: 0.1
   <AttackSpeedScaleAdd>k__BackingField: 0.1
   <SpawnDepth>k__BackingField: 0
-  <SpawnWeight>k__BackingField: 0
-  <EnemyObject>k__BackingField: {fileID: 1838291120267913368, guid: 3846358b5d7bd8c4f8691d6d50bc74ef, type: 3}
+  <SpawnWeight>k__BackingField: 1
+  <EnemyObject>k__BackingField: {fileID: 1838291120267913368, guid: ce541615ae5a3b64982c8ec8457d43bf, type: 3}

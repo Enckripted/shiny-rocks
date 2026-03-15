@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public interface IEnemyData
@@ -14,6 +15,6 @@ public interface IEnemyData
 	public float SpeedScaleAdd { get; }
 	public float AttackSpeedScaleAdd { get; }
 
-	public Texture2D Sprite { get; }
+	public List<Texture2D> Sprite { get; }
 	public GameObject EnemyObject { get; }
 }

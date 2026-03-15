@@ -55,7 +55,23 @@ public class EnemySpawnManager : MonoBehaviour
 
     private EnemyData GetRandomEnemyData()
     {
-        return allEnemyData[Random.Range(0, allEnemyData.Length)];
+        float weightSum = 0f;
+        foreach (EnemyData data in allEnemyData)
+        {
+            if (data.SpawnDepth <= PlayerDrill.instance.DrillDepth)
+                weightSum += data.SpawnWeight;
+        }
+
+        float rand = weightSum * Random.Range(0f, 1f);
+        float cur = 0f;
+        foreach (EnemyData data in allEnemyData)
+        {
+            if (data.SpawnDepth <= PlayerDrill.instance.DrillDepth)
+                cur += data.SpawnWeight;
+            if (cur >= rand)
+                return data;
+        }
+        return null; //should throw an error if this happens
     }
 
     private void AttemptSpawnEnemy()
