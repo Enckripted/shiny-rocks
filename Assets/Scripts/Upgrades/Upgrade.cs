@@ -13,6 +13,8 @@ public abstract class Upgrade : MonoBehaviour
     [field: SerializeField] public float InitialCost { get; private set; }
     [field: SerializeField] public float CostScale { get; private set; }
 
+    public virtual string EffectText { get => ""; }
+
     public abstract PlayerStats ApplyEffect(PlayerStats curStats);
 
     private float GetCost()
