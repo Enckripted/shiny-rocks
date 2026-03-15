@@ -49,24 +49,24 @@ public class bgOreSpawner : MonoBehaviour
                 float x = Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect);
                 float y;
                 int randInt = UnityEngine.Random.Range(1, 3);
-                if(randInt == 1)
+                if (randInt == 1)
                 {
                     y = UnityEngine.Random.Range(range1.x, range1.y);
-                    
+
                 }
                 else
                 {
                     y = UnityEngine.Random.Range(range2.x, range2.y);
                 }
-                ore.transform.position = new Vector2(x+3, y);
+                ore.transform.position = new Vector2(x + 3, y);
                 float scale = UnityEngine.Random.Range(scaleRange.x, scaleRange.y);
                 ore.transform.localScale.Set(scale, scale, 1);
 
                 float randomRotation = UnityEngine.Random.Range(0f, 360f);
                 ore.transform.rotation = Quaternion.Euler(0f, 0f, randomRotation);
-                
+
             }
-            float waitTime = UnityEngine.Random.Range(1f, 3f);   
+            float waitTime = UnityEngine.Random.Range(1f, 3f);
             yield return new WaitForSeconds(waitTime);
         }
     }
