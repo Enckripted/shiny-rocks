@@ -7,7 +7,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
-public class PlayerDrill : Damagable
+[RequireComponent(typeof(Health))]
+public class PlayerDrill : MonoBehaviour
 {
     public static PlayerDrill instance;
 
@@ -50,14 +51,16 @@ public class PlayerDrill : Damagable
         {"Recharge Time", 10.0 },
         {"Weapon Overclock", 20.0},
         {"Ore Doubler", 20.0 }
-    }; 
-    
+    };
+
 
     public bool IsMoving;
+    public Health DrillHealth => health;
 
     private AudioSource source;
     private List<Mineral> collidingMinerals = new List<Mineral>();
     private ParticleSystem miningParticles;
+    private Health health;
 
     [SerializeField] private AudioClip clip;
 
@@ -68,10 +71,8 @@ public class PlayerDrill : Damagable
 
     private void OnRunBegin()
     {
-        Health = (float)InitialHealth;
-        MaxHealth = (float)InitialHealth;
+        health.MaxHealth = (float)InitialHealth;
         DrillDepth = 0;
-        UpdateHealthbar();
 
         //set ability cooldowns
         for (int i = 0; i < 6; i++)
@@ -80,28 +81,28 @@ public class PlayerDrill : Damagable
             abilityCooldownTimers[i] = cooldownDict[abilityButtons[i].transform.Find("AbilityText").GetComponent<TMP_Text>().text];
             abilityButtons[i].transform.Find("CooldownText").GetComponent<TMP_Text>().text = abilityCooldownTimers[i].ToString();
         }
-        Array.Fill(isAbilityReady, false); 
+        Array.Fill(isAbilityReady, false);
 
+    }
+
+    void Awake()
+    {
+        instance = this;
+        source = GetComponent<AudioSource>();
+        health = GetComponent<Health>();
+
+        source.clip = clip;
     }
 
     void Start()
     {
-        source = GetComponent<AudioSource>();
-        OnDeathEvent.AddListener(StopRun);
         GameManager.instance.runStartEvent.AddListener(OnRunBegin);
-        Health = 1;
-        MaxHealth = 1;
-        UpdateHealthbar();
-
-        instance = this;
-        source.clip = clip;
-        source.Play();
+        health.OnDeath += StopRun;
 
         miningParticles = transform.Find("MiningParticles").gameObject.GetComponent<ParticleSystem>();
 
-        for(int i = 0; i < 6; i++)
+        for (int i = 0; i < 6; i++)
         {
-            
             abilityButtons[i] = buttonPanel.transform.GetChild(i).gameObject;
         }
 

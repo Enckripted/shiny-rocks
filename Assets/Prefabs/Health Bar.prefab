@@ -100,7 +100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 704793821091668371}
-  - component: {fileID: 980070055558260863}
+  - component: {fileID: 6279804080724865611}
   m_Layer: 0
   m_Name: Health Bar
   m_TagString: Untagged
@@ -126,7 +126,7 @@ Transform:
   - {fileID: 7762562702834203904}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &980070055558260863
+--- !u!114 &6279804080724865611
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,13 +135,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6943961867042321884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b11b12686c86d9469b1eb4c985863ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 0beac6c21c954ac4cae4a1f8eea3e35c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthBar
+  m_EditorClassIdentifier: Assembly-CSharp::NewHealthBar
   healthBarObject: {fileID: 6546895866321787714}
   healthText: {fileID: 7369151398841832722}
-  MaxHealth: 50
-  Health: 25
+  health: {fileID: 0}
 --- !u!1 &7677673947968840892
 GameObject:
   m_ObjectHideFlags: 0

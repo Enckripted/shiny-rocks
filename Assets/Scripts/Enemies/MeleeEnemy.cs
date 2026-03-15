@@ -18,6 +18,6 @@ public class MeleeEnemy : BaseEnemy
 
     protected override void Attack()
     {
-        GameManager.instance.PlayerDrill.DealDamage(Damage);
+        GameManager.instance.PlayerDrill.DrillHealth.TakeDamage(Damage);
     }
 }

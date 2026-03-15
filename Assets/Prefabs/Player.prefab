@@ -790,6 +790,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1018268116362614973}
+  - component: {fileID: 318734290577789028}
   - component: {fileID: 5080446556822409914}
   - component: {fileID: 8249380357370166250}
   - component: {fileID: 5534674628487168342}
@@ -821,6 +822,20 @@ Transform:
   - {fileID: 829981344275027653}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &318734290577789028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7915992724744660047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed70871613126944b7e10d60b65d4a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  MaxHealth: 0
+  <CurrentHealth>k__BackingField: 0
 --- !u!114 &5080446556822409914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -852,7 +867,9 @@ MonoBehaviour:
   weaponDamageLevel: 0
   WeaponCooldownLevel: 0
   weaponRadiusLevel: 0
-  abilityTimers: []
+  buttonPanel: {fileID: 0}
+  abilityButtons: []
+  abilityCooldownTimers: []
   IsMoving: 0
   clip: {fileID: 8300000, guid: 923bd783c3b961341a745796a803c996, type: 3}
 --- !u!82 &8249380357370166250

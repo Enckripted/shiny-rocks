@@ -18,14 +18,7 @@ public class RangedBullet : MonoBehaviour
 	{
 		if (other.gameObject == GameManager.instance.PlayerDrill.gameObject)
 		{
-			//TODO: once june has abilities ready migrate the player drill to the Health component
-			/*
-			Health drillHealth = other.GetComponent<Health>();
-			if (drillHealth != null)
-			{
-				drillHealth.TakeDamage(damage);
-			}*/
-			GameManager.instance.PlayerDrill.DealDamage(damage);
+			PlayerDrill.instance.DrillHealth.TakeDamage(damage);
 			Destroy(gameObject);
 		}
 	}
