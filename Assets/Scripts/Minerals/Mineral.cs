@@ -4,51 +4,46 @@ using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(AudioSource))]
-[RequireComponent(typeof(Health))]
-public class Mineral : MonoBehaviour
+public class Mineral : Damagable
 {
     public string MineralName { get; private set; }
 
     private PlayerDrill playerDrill;
     private SpriteRenderer spriteRenderer;
     private AudioSource source;
-    private Health health;
 
     [SerializeField] private SpriteRenderer mineralSpriteRenderer;
     [SerializeField] private ParticleSystem hitEffect;
     [SerializeField] private AudioClip clip;
 
+    private bool hasCollidedWithDrill;
+
     public void Initialize(MineralData data)
     {
-        health.MaxHealth = data.MaxHealth;
+        Health = data.MaxHealth;
+        MaxHealth = data.MaxHealth;
         MineralName = data.Name;
         mineralSpriteRenderer.color = data.Color;
+        UpdateHealthbar();
     }
 
     public void DestroyMineral()
     {
-        mineralSpriteRenderer.color = new(0, 0, 0, 0);
-        health.gameObject.SetActive(false);
+        transform.Find("Sprite").gameObject.GetComponent<SpriteRenderer>().color = new(0, 0, 0, 0);
+        transform.Find("Health Bar").gameObject.SetActive(false);
         hitEffect.Play();
         GameManager.instance.AddMineral(MineralName, 1);
-        //source.clip = clip;
-        //source.Play();
+        source.clip = clip;
+        source.Play();
         StartCoroutine(MineralRemovalDelay());
     }
 
-    void Awake()
+    void Start()
     {
         playerDrill = FindFirstObjectByType<PlayerDrill>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         source = GetComponent<AudioSource>();
-        health = GetComponent<Health>();
-
-        health.OnDeath += DestroyMineral;
-    }
-
-    void OnDestroy()
-    {
-        health.OnDeath -= DestroyMineral;
+        OnDeathEvent.AddListener(DestroyMineral);
     }
 
     //ai gen movement + june edits
