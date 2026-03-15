@@ -20,7 +20,7 @@ public class Mineral : MonoBehaviour
 
     public void Initialize(MineralData data)
     {
-        health.MaxHealth = data.MaxHealth;
+        health.SetMaxHealth(data.MaxHealth);
         MineralName = data.Name;
         mineralSpriteRenderer.color = data.Color;
     }

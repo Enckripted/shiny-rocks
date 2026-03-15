@@ -33,7 +33,7 @@ public abstract class BaseEnemy : MonoBehaviour
         float scaleLevel = (float)Math.Floor(GameManager.instance.PlayerDrill.DrillDepth / 10);
         float maxHealth = data.MaxHealth * (float)Math.Pow(data.HealthScaleMult, scaleLevel);
 
-        health.MaxHealth = maxHealth;
+        health.SetMaxHealth(maxHealth);
         Speed = data.Speed + data.SpeedScaleAdd * scaleLevel;
         Damage = data.Damage + (float)Math.Pow(data.DamageScaleMult, scaleLevel);
         AttackSpeed = data.AttackSpeed - data.AttackSpeedScaleAdd * scaleLevel;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
@@ -53,6 +54,7 @@ public class PlayerDrill : MonoBehaviour
         {"Ore Doubler", 20.0 }
     };
 
+    [SerializeField] private GameObject healthBarObj;
 
     public bool IsMoving;
     public Health DrillHealth => health;
@@ -71,7 +73,8 @@ public class PlayerDrill : MonoBehaviour
 
     private void OnRunBegin()
     {
-        health.MaxHealth = (float)InitialHealth;
+        health.SetMaxHealth((float)InitialHealth);
+
         DrillDepth = 0;
 
         //set ability cooldowns
@@ -185,6 +188,7 @@ public class PlayerDrill : MonoBehaviour
             }
         }
 
+        healthBarObj.SetActive(GameManager.instance.inRun);
     }
 
     void OnCollisionEnter2D(Collision2D collision)

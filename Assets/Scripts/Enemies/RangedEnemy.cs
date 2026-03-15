@@ -11,7 +11,6 @@ public class RangedEnemy : BaseEnemy
 
     public void Initialize(EnemyData data, Vector3 target)
     {
-        Debug.Log("ranged spawn");
         base.Initialize(data);
         targetPosition = target;
     }

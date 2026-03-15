@@ -45,7 +45,6 @@ public class EnemySpawnManager : MonoBehaviour
     private bool IsPosValidSpawnPos(Vector3 location)
     {
         Collider2D collider = Physics2D.OverlapCircle(location, overlapCheckRadius, overlapLayerMask);
-        Debug.Log(collider);
         return collider == null;
     }
 

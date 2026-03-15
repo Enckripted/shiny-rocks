@@ -8,12 +8,6 @@ public class Health : MonoBehaviour
 
 	public event Action OnDeath;
 
-	//presumably the max health is being set at runtime
-	void Start()
-	{
-		CurrentHealth = MaxHealth;
-	}
-
 	public void TakeDamage(float amount)
 	{
 		CurrentHealth -= amount;
@@ -29,5 +23,11 @@ public class Health : MonoBehaviour
 	public void Heal(float amount)
 	{
 		CurrentHealth = Mathf.Min(CurrentHealth + amount, MaxHealth);
+	}
+
+	public void SetMaxHealth(float amount)
+	{
+		MaxHealth = amount;
+		CurrentHealth = amount;
 	}
 }
