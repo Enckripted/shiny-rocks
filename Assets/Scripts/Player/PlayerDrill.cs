@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditorInternal;
 using UnityEngine;
 
@@ -33,7 +35,9 @@ public class PlayerDrill : Damagable
     public int weaponRadiusLevel = 0;
 
     [Header("Ability Button Variables")]
-    [SerializeField] private double[] abilityTimers; //stores cooldown timer of button; use button number as index
+    [SerializeField] private GameObject buttonPanel;
+    [SerializeField] private GameObject[] abilityButtons;
+    [SerializeField] private double[] abilityTimers; //stores cooldown timer of button
     Dictionary<string, double> cooldownDict = new Dictionary<string, double>() {
         //stores cooldown times for abilities, uses ability name as key
         //timer values are placeholders for now. add ability upgrading later
@@ -84,11 +88,43 @@ public class PlayerDrill : Damagable
 
         miningParticles = transform.Find("MiningParticles").gameObject.GetComponent<ParticleSystem>();
 
+        Array.Fill(abilityTimers, 0); //sets all timers (cooldowns, not countdowns) to zero
+
     }
-    public void AbilityButtonPress(string abilName, int buttonNum)
+    public void AbilityButtonPress(string buttonName)
     {
         //set the cooldown timer of the pressed button to the associated cooldown in the cooldown dictionary
-        abilityTimers[buttonNum] = cooldownDict[abilName];
+        GameObject buttonPressed = buttonPanel.transform.Find(buttonName).gameObject;
+        string abilityText = buttonPressed.transform.Find("AbilityText").GetComponent<TMP_Text>().text;
+        int buttonNum = buttonName[^1] - '0'; //apparently the - '0' part is necessary?? gets the number of the button from the name
+
+        switch (buttonName)
+        {
+            case "AbilitySubPanel1":
+                Debug.Log("button 1 pressed");
+                abilityTimers[0] = cooldownDict[abilityText];
+                break;
+            case "AbilitySubPanel2":
+                abilityTimers[1] = cooldownDict[abilityText];
+                break;
+            case "AbilitySubPanel3":
+                abilityTimers[2] = cooldownDict[abilityText];
+                break;
+            case "AbilitySubPanel4":
+                abilityTimers[3] = cooldownDict[abilityText];
+                break;
+            case "AbilitySubPanel5":
+                abilityTimers[4] = cooldownDict[abilityText];
+                break;
+            case "AbilitySubPanel6":
+                abilityTimers[5] = cooldownDict[abilityText];
+                break;
+        }
+    }
+
+    void ManageTimers()
+    {
+
     }
 
     void Update()
