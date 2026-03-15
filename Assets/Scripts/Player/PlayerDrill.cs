@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class PlayerDrill : Damagable
@@ -37,10 +39,11 @@ public class PlayerDrill : Damagable
     [Header("Ability Button Variables")]
     [SerializeField] private GameObject buttonPanel;
     [SerializeField] private GameObject[] abilityButtons;
-    [SerializeField] private double[] abilityTimers; //stores cooldown timer of button
+    [SerializeField] private double[] abilityCooldownTimers; //stores cooldown timer of button
+    private bool[] isAbilityReady = new bool[6];
     Dictionary<string, double> cooldownDict = new Dictionary<string, double>() {
         //stores cooldown times for abilities, uses ability name as key
-        //timer values are placeholders for now. add ability upgrading later
+        //timer values are placeholders for now. add ability upgrading later?
         {"Drill Speed", 10.0 },
         {"Drill Damage", 10.0 },
         {"Weapon Damage", 10.0 },
@@ -48,8 +51,6 @@ public class PlayerDrill : Damagable
         {"Weapon Overclock", 20.0},
         {"Ore Doubler", 20.0 }
     }; 
-
-    [Header("Ability Button Timers")]
     
 
     public bool IsMoving;
@@ -71,6 +72,16 @@ public class PlayerDrill : Damagable
         MaxHealth = (float)InitialHealth;
         DrillDepth = 0;
         UpdateHealthbar();
+
+        //set ability cooldowns
+        for (int i = 0; i < 6; i++)
+        {
+            //fetches cooldown using abilityButton text
+            abilityCooldownTimers[i] = cooldownDict[abilityButtons[i].transform.Find("AbilityText").GetComponent<TMP_Text>().text];
+            abilityButtons[i].transform.Find("CooldownText").GetComponent<TMP_Text>().text = abilityCooldownTimers[i].ToString();
+        }
+        Array.Fill(isAbilityReady, false); 
+
     }
 
     void Start()
@@ -88,9 +99,15 @@ public class PlayerDrill : Damagable
 
         miningParticles = transform.Find("MiningParticles").gameObject.GetComponent<ParticleSystem>();
 
-        Array.Fill(abilityTimers, 0); //sets all timers (cooldowns, not countdowns) to zero
+        for(int i = 0; i < 6; i++)
+        {
+            
+            abilityButtons[i] = buttonPanel.transform.GetChild(i).gameObject;
+        }
 
     }
+
+
     public void AbilityButtonPress(string buttonName)
     {
         //set the cooldown timer of the pressed button to the associated cooldown in the cooldown dictionary
@@ -101,30 +118,24 @@ public class PlayerDrill : Damagable
         switch (buttonName)
         {
             case "AbilitySubPanel1":
-                Debug.Log("button 1 pressed");
-                abilityTimers[0] = cooldownDict[abilityText];
+                abilityCooldownTimers[0] = cooldownDict[abilityText];
                 break;
             case "AbilitySubPanel2":
-                abilityTimers[1] = cooldownDict[abilityText];
+                abilityCooldownTimers[1] = cooldownDict[abilityText];
                 break;
             case "AbilitySubPanel3":
-                abilityTimers[2] = cooldownDict[abilityText];
+                abilityCooldownTimers[2] = cooldownDict[abilityText];
                 break;
             case "AbilitySubPanel4":
-                abilityTimers[3] = cooldownDict[abilityText];
+                abilityCooldownTimers[3] = cooldownDict[abilityText];
                 break;
             case "AbilitySubPanel5":
-                abilityTimers[4] = cooldownDict[abilityText];
+                abilityCooldownTimers[4] = cooldownDict[abilityText];
                 break;
             case "AbilitySubPanel6":
-                abilityTimers[5] = cooldownDict[abilityText];
+                abilityCooldownTimers[5] = cooldownDict[abilityText];
                 break;
         }
-    }
-
-    void ManageTimers()
-    {
-
     }
 
     void Update()
@@ -154,6 +165,23 @@ public class PlayerDrill : Damagable
         }
 
         source.volume = IsMoving ? 0.25f : 0;
+
+        if (GameManager.instance.inRun)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                if (abilityCooldownTimers[i] > 0)
+                {
+                    abilityCooldownTimers[i] -= Time.deltaTime;
+                    abilityButtons[i].GetComponent<Button>().interactable = false;
+                }
+                else
+                {
+                    abilityButtons[i].GetComponent<Button>().interactable = true;
+                }
+            }
+        }
+
     }
 
     void OnCollisionEnter2D(Collision2D collision)
