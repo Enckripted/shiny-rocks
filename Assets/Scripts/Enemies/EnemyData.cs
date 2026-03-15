@@ -1,18 +1,20 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/EnemyData")]
-public class EnemyData : ScriptableObject
+public class EnemyData : ScriptableObject, IEnemyData
 {
-    public string Name;
-    public int MaxHealth;
-    public float Damage;
-    public float Speed;
-    public float AttackSpeed;
-    public Texture2D Sprite;
+    [field: SerializeField] public string Name { get; private set; }
+    [field: SerializeField] public int MaxHealth { get; private set; }
+    [field: SerializeField] public float Damage { get; private set; }
+    [field: SerializeField] public float Speed { get; private set; }
+    [field: SerializeField] public float AttackSpeed { get; private set; }
+    [field: SerializeField] public Texture2D Sprite { get; private set; }
 
     [Header("Every 10 meters scale by")]
-    public float HealthScaleMult;
-    public float DamageScaleMult;
-    public float SpeedScaleAdd;
-    public float AttackSpeedScaleAdd;
+    [field: SerializeField] public float HealthScaleMult { get; private set; }
+    [field: SerializeField] public float DamageScaleMult { get; private set; }
+    [field: SerializeField] public float SpeedScaleAdd { get; private set; }
+    [field: SerializeField] public float AttackSpeedScaleAdd { get; private set; }
+
+    [field: SerializeField] public GameObject EnemyObject { get; private set; }
 }
