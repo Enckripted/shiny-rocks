@@ -143,10 +143,8 @@ public class PlayerDrill : Damagable
         List<Mineral> remainingMinerals = new List<Mineral>();
         foreach (Mineral mineral in collidingMinerals)
         {
-            Health mineralHealth = mineral.GetComponent<Health>();
-            mineralHealth.TakeDamage((float)DrillDamage * Time.deltaTime);
-
-            if (mineralHealth.CurrentHealth > 0)
+            mineral.DealDamage((float)DrillDamage * Time.deltaTime);
+            if (mineral.Health > 0)
                 remainingMinerals.Add(mineral);
         }
         collidingMinerals = remainingMinerals;
@@ -155,11 +153,11 @@ public class PlayerDrill : Damagable
         if (IsMoving && GameManager.instance.inRun)
         {
             DrillDepth += (float)DrillSpeed * Time.deltaTime / 10;
-            if (miningParticles.isPlaying == false)
-            {
+            if(miningParticles.isPlaying == false)
+            {    
                 miningParticles.Play();
             }
-
+            
         }
         else
         {
@@ -192,10 +190,9 @@ public class PlayerDrill : Damagable
         if (mineral == null)
             return;
 
-        Health mineralHealth = mineral.GetComponent<Health>();
-        if (DrillDamage / 10 >= mineralHealth.CurrentHealth)
-            mineralHealth.TakeDamage((float)DrillDamage);
-        if (mineralHealth.CurrentHealth > 0)
+        if (DrillDamage / 10 >= mineral.Health)
+            mineral.DealDamage((float)DrillDamage);
+        if (mineral.Health > 0)
             collidingMinerals.Add(mineral);
     }
 
