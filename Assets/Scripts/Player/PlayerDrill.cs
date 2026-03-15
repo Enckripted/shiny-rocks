@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +18,9 @@ public class PlayerDrill : MonoBehaviour
     public double WeaponCooldown => BaseWeaponCooldown + UpgradeBuffs.instance.WeaponCooldownAddition;
 
     public float DrillDepth;
+
+    public PlayerStats BaseDrillStats;
+    public PlayerStats DrillStats => UpgradeManager.instance.CalculateEffects(BaseDrillStats);
 
     [Header("Base Stats")]
     public double BaseHealth;
