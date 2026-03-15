@@ -850,21 +850,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   DrillDepth: 0
-  BaseHealth: 50
-  BaseDrillSpeed: 3
-  BaseDrillDamage: 2
-  BaseWeaponDamage: 5
-  BaseWeaponRadius: 0.5
-  BaseWeaponCooldown: 1.2
-  drillHealthLevel: 0
-  drillSpeedLevel: 0
-  drillDamageLevel: 0
-  weaponDamageLevel: 0
-  WeaponCooldownLevel: 0
-  weaponRadiusLevel: 0
+  BaseDrillStats:
+    InitialHealth: 50
+    DrillSpeed: 3
+    DrillDamage: 2
+    WeaponDamage: 5
+    WeaponRadius: 0.5
+    WeaponCooldown: 1
   buttonPanel: {fileID: 0}
   abilityButtons: []
   abilityCooldownTimers: []
+  healthBarObj: {fileID: 0}
   IsMoving: 0
   clip: {fileID: 8300000, guid: 923bd783c3b961341a745796a803c996, type: 3}
 --- !u!82 &8249380357370166250

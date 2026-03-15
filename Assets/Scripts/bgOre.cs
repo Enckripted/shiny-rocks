@@ -16,7 +16,7 @@ public class bgOre : MonoBehaviour
         // move left according to the player's drill speed (assume PlayerController always exists)
         if (playerDrill.IsMoving && GameManager.instance.inRun)
         {
-            transform.Translate(Vector3.left * (float)playerDrill.DrillSpeed * Time.deltaTime, Space.World);
+            transform.Translate(Vector3.left * (float)playerDrill.DrillStats.DrillSpeed * Time.deltaTime, Space.World);
         }
 
 

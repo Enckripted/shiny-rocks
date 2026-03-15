@@ -16,7 +16,7 @@ public class GearRotate : MonoBehaviour
     {
         if (GameManager.instance.inRun && FindFirstObjectByType<PlayerDrill>().IsMoving)
         {
-            gameObject.transform.Rotate(new Vector3(0, 0, 1 * rotateSpeed * (float)(playerDrill.DrillSpeed / 4)));
+            gameObject.transform.Rotate(new Vector3(0, 0, 1 * rotateSpeed * (float)(playerDrill.DrillStats.DrillSpeed / 4)));
         }
     }
 }
