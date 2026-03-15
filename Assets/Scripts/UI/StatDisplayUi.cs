@@ -24,7 +24,7 @@ public class StatDisplayUi : MonoBehaviour
 
         if (depthText != null && player != null)
         {
-            depthText.text = "Depth: " + player.DrillDepth.ToString("F1") + "m";
+            depthText.text = player.DrillDepth.ToString("F1") + "m";
         }
     }
 }
