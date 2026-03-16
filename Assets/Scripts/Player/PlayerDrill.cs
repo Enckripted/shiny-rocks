@@ -19,6 +19,7 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private GameObject buttonPanel;
     [SerializeField] private GameObject[] abilityButtons;
     [SerializeField] private double[] abilityCooldownTimers; //stores cooldown timer of button
+    [SerializeField] private double[] abilityActiveTimers; //stores timer for ability
     [SerializeField] private bool[] isAbilityReady = new bool[6];
     Dictionary<string, double> cooldownDict = new Dictionary<string, double>() {
         //stores cooldown times for abilities, uses ability name as key
@@ -117,6 +118,29 @@ public class PlayerDrill : MonoBehaviour
                 abilityCooldownTimers[5] = cooldownDict[abilityText];
                 break;
         }
+
+        abilityActiveTimers[buttonNum] = GetActiveTime(abilityText);
+    }
+
+    private double GetActiveTime(string abilityName)
+    {
+        switch (abilityName)
+        {
+            case "Drill Speed":
+                return 2.5;
+            case "Drill Damage":
+                return 2.5;
+            case "Weapon Speed":
+                return 2.5;
+            case "Weapon Damage":
+                return 5.0;
+            case "Weapon Overclock":
+                return 2.0;
+            case "Ore Doubler":
+                return 10.0;
+            default:
+                return 0;
+        }
     }
 
     void Update()
@@ -164,6 +188,10 @@ public class PlayerDrill : MonoBehaviour
                     abilityButtons[i].GetComponent<Button>().interactable = true;
                     isAbilityReady[i] = true;
                 }
+
+                if (abilityActiveTimers[i] > 0)
+                    abilityActiveTimers[i] -= Time.deltaTime;
+
             }
         }
 
