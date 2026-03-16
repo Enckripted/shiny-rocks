@@ -27,6 +27,11 @@ public class DamageNumber : MonoBehaviour
         damageText = GetComponent<TextMeshPro>();
     }
 
+    void Start()
+    {
+        damageText.text = damageNum.ToString("F0");
+    }
+
     void Update()
     {
         damageText.text = damageNum.ToString("F0");

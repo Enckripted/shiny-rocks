@@ -25,5 +25,5 @@ MonoBehaviour:
   <SpeedScaleAdd>k__BackingField: 0.1
   <AttackSpeedScaleAdd>k__BackingField: 0.1
   <SpawnDepth>k__BackingField: 0
-  <SpawnWeight>k__BackingField: 4
+  <SpawnWeight>k__BackingField: 1
   <EnemyObject>k__BackingField: {fileID: 1838291120267913368, guid: 3f088dd11f5461542ab3175e06926a44, type: 3}

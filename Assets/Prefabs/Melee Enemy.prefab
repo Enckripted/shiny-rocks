@@ -63,6 +63,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3ec3a2470276044995b55970b2d6ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeEnemy
+  damageNumberPrefab: {fileID: 6584957645631030996, guid: 0ae18cabce949c74cb90402e393d4624, type: 3}
+  healNumberPrefab: {fileID: 6584957645631030996, guid: 484ed9ecbeba42943a9388eab939ee9b, type: 3}
   spriteRenderer: {fileID: 4256143980246744868}
 --- !u!50 &2662460107002106218
 Rigidbody2D:

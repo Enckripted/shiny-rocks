@@ -23,6 +23,6 @@ MonoBehaviour:
   <DamageScaleMult>k__BackingField: 1.1
   <SpeedScaleAdd>k__BackingField: 0.1
   <AttackSpeedScaleAdd>k__BackingField: 0.1
-  <SpawnDepth>k__BackingField: 5
-  <SpawnWeight>k__BackingField: 2
+  <SpawnDepth>k__BackingField: 0
+  <SpawnWeight>k__BackingField: 1
   <EnemyObject>k__BackingField: {fileID: 1838291120267913368, guid: 3846358b5d7bd8c4f8691d6d50bc74ef, type: 3}

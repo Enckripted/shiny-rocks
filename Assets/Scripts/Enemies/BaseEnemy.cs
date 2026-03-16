@@ -11,10 +11,26 @@ public abstract class BaseEnemy : MonoBehaviour
 
     public event Action OnDeathEvent;
 
+    [SerializeField] private GameObject damageNumberPrefab;
+    [SerializeField] private GameObject healNumberPrefab;
+
     protected Rigidbody2D rb;
     [SerializeField] protected SpriteRenderer spriteRenderer;
     protected Health health;
     protected float lastAttack = 0;
+
+    private void SpawnDamageNumber(float dmg)
+    {
+        DamageNumber damageNumber = Instantiate(damageNumberPrefab, transform.position, Quaternion.identity).GetComponent<DamageNumber>();
+        damageNumber.damageNum = dmg;
+    }
+
+    private void SpawnHealNumber(float dmg)
+    {
+        //it was actually a DAMAGE NUMBER ALL ALONG
+        DamageNumber healNummber = Instantiate(healNumberPrefab, transform.position, Quaternion.identity).GetComponent<DamageNumber>();
+        healNummber.damageNum = dmg;
+    }
 
     protected virtual void StopMoving()
     {
@@ -61,6 +77,8 @@ public abstract class BaseEnemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         health = GetComponent<Health>();
+        health.OnDamage += SpawnDamageNumber;
+        health.OnHeal += SpawnHealNumber;
         health.OnDeath += KillEnemy;
         OnAwake();
     }
@@ -85,5 +103,11 @@ public abstract class BaseEnemy : MonoBehaviour
         {
             DoMovement();
         }
+
+        /*
+        if (PlayerDrill.instance.IsMoving)
+        {
+            transform.position -= new Vector3((float)PlayerDrill.instance.DrillStats.DrillSpeed * Time.deltaTime, 0, 0);
+        }*/
     }
 }

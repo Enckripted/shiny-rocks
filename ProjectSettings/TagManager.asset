@@ -16,7 +16,7 @@ TagManager:
   - Enemy
   - Water
   - UI
-  - 
+  - Mineral
   - 
   - 
   - 
@@ -51,6 +51,9 @@ TagManager:
     locked: 0
   - name: Health Bars
     uniqueID: 3884355159
+    locked: 0
+  - name: Damage Numbers
+    uniqueID: 1835314735
     locked: 0
   m_RenderingLayers:
   - Default

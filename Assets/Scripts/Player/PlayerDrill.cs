@@ -11,23 +11,24 @@ public class PlayerDrill : MonoBehaviour
     public static PlayerDrill instance;
 
     public float DrillDepth;
+    public bool ShouldDoubleOreYield => abilityActiveTimers[5] > 0;
 
     public PlayerStats BaseDrillStats;
-    public PlayerStats DrillStats => UpgradeManager.instance.CalculateEffects(BaseDrillStats);
+    public PlayerStats DrillStats => ApplyAbilites(UpgradeManager.instance.CalculateEffects(BaseDrillStats));
 
     [Header("Ability Button Variables")]
     [SerializeField] private GameObject buttonPanel;
     [SerializeField] private GameObject[] abilityButtons;
     [SerializeField] private double[] abilityCooldownTimers; //stores cooldown timer of button
-    [SerializeField] private double[] abilityActiveTimers; //stores timer for ability
+    [SerializeField] private double[] abilityActiveTimers = new double[6]; //stores timer for ability
     [SerializeField] private bool[] isAbilityReady = new bool[6];
     Dictionary<string, double> cooldownDict = new Dictionary<string, double>() {
         //stores cooldown times for abilities, uses ability name as key
         //timer values are placeholders for now. add ability upgrading later?
         {"Drill Speed", 10.0 },
         {"Drill Damage", 10.0 },
+        {"Weapon Speed", 10.0 },
         {"Weapon Damage", 10.0 },
-        {"Recharge Time", 10.0 },
         {"Weapon Overclock", 20.0},
         {"Ore Doubler", 20.0 }
     };
@@ -73,6 +74,7 @@ public class PlayerDrill : MonoBehaviour
         health = GetComponent<Health>();
 
         source.clip = clip;
+        abilityActiveTimers = new double[6];
     }
 
     void Start()
@@ -141,6 +143,31 @@ public class PlayerDrill : MonoBehaviour
             default:
                 return 0;
         }
+    }
+
+    private PlayerStats ApplyAbilites(PlayerStats curStats)
+    {
+        if (abilityActiveTimers[0] > 0)
+        {
+            curStats.DrillSpeed *= 2;
+        }
+        else if (abilityActiveTimers[1] > 0)
+        {
+            curStats.DrillDamage *= 2;
+        }
+        else if (abilityActiveTimers[2] > 0)
+        {
+            curStats.WeaponCooldown /= 2;
+        }
+        else if (abilityActiveTimers[3] > 0)
+        {
+            curStats.WeaponDamage *= 2;
+        }
+        else if (abilityActiveTimers[4] > 0)
+        {
+            curStats.WeaponCooldown /= 4;
+        }
+        return curStats;
     }
 
     void Update()

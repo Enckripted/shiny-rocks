@@ -136,6 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f3e97fe8d6a89b4ca6bda86b0b049b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RangedEnemy
+  damageNumberPrefab: {fileID: 6584957645631030996, guid: 0ae18cabce949c74cb90402e393d4624, type: 3}
+  healNumberPrefab: {fileID: 6584957645631030996, guid: 484ed9ecbeba42943a9388eab939ee9b, type: 3}
   spriteRenderer: {fileID: 4256143980246744868}
   bulletPrefab: {fileID: 1154424331638651049, guid: 59b313cdacbfb4541af7290da82f0817, type: 3}
   bulletSpeed: 40

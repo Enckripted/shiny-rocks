@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,12 @@ public class MineralSpawnManager : MonoBehaviour
 {
     [SerializeField] private MineralSpawner spawner;
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private float spawnDistance = 0.5f;
+    [SerializeField] private float baseSpawnDistance = 0.5f;
+    [SerializeField] private float spawnDistanceDecrement = 0.05f;
+    [SerializeField] private float decrementDepthAmount = 10f;
+    [SerializeField] private LayerMask layerMask;
+    [SerializeField] private float intersectionCheckRadius;
+    private float spawnDistance => Math.Max(baseSpawnDistance - spawnDistanceDecrement * (PlayerDrill.instance.DrillDepth / decrementDepthAmount), 0.05f);
     private Vector2 ySpawnRange = new(-2, 4);
 
     private MineralData[] allMineralData;
@@ -32,10 +37,17 @@ public class MineralSpawnManager : MonoBehaviour
                 options.Add(mineralData);
             }
         }
-        return options[Random.Range(0, options.Count)];
+        return options[UnityEngine.Random.Range(0, options.Count)];
     }
 
-    private void SpawnRandomMineral()
+    private bool IsPosValidSpawnPos(Vector3 location)
+    {
+        Collider2D collider = Physics2D.OverlapCircle(location, intersectionCheckRadius, layerMask);
+        if (collider) Debug.Log(collider);
+        return collider == null;
+    }
+
+    private void AttemptSpawnRandomMineral()
     {
         if (allMineralData == null || allMineralData.Length == 0 || spawner == null || mainCam == null)
             return;
@@ -44,11 +56,14 @@ public class MineralSpawnManager : MonoBehaviour
         var data = ChooseRandomMineral();
 
         // determine right end of camera position; choose random Y within range
-        float x = Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect);
-        float y = Random.Range(ySpawnRange.x, ySpawnRange.y);
+        float x = Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect) + 3;
+        float y = UnityEngine.Random.Range(ySpawnRange.x, ySpawnRange.y);
+        Debug.Log(new Vector3(x, y));
+        if (!IsPosValidSpawnPos(new Vector3(x, y)))
+            return;
 
         //slight offset to x to ensure they spawn off camera
-        Vector3 spawnPos = new(x + 3, y, 0f);
+        Vector3 spawnPos = new(x, y, 0f);
         spawner.SpawnMineral(data, spawnPos);
     }
 
@@ -73,7 +88,8 @@ public class MineralSpawnManager : MonoBehaviour
     {
         while (gameManager.inRun && playerDrill.DrillDepth - lastSpawn >= spawnDistance)
         {
-            SpawnRandomMineral();
+
+            AttemptSpawnRandomMineral();
             lastSpawn += spawnDistance;
         }
     }
