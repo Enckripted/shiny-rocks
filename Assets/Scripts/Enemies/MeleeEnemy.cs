@@ -4,9 +4,9 @@ public class MeleeEnemy : BaseEnemy
 {
     private Vector3 targetPosition;
 
-    public void Initialize(EnemyData data, Vector3 targetPos)
+    public override void Initialize(EnemyData data, Vector3 targetPos)
     {
-        base.Initialize(data);
+        base.Initialize(data, targetPos);
         targetPosition = targetPos;
     }
 

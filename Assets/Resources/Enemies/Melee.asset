@@ -10,19 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca91e7f900381dd44ac5f29aa93850f5, type: 3}
-  m_Name: Ranged
+  m_Name: Melee
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  <Name>k__BackingField: Ranged
+  <Name>k__BackingField: Melee
   <MaxHealth>k__BackingField: 10
   <Damage>k__BackingField: 2
   <Speed>k__BackingField: 3
   <AttackSpeed>k__BackingField: 1
   <Sprite>k__BackingField:
+  - {fileID: 2800000, guid: 5ca74fbc65a5e8d3aadbc61afbf59a8b, type: 3}
   - {fileID: 2800000, guid: 52293900555e2e3c2be675b1bb8b3fb9, type: 3}
+  - {fileID: 2800000, guid: 27fee25a478da8917a0bf969301ad309, type: 3}
   <HealthScaleMult>k__BackingField: 1.1
   <DamageScaleMult>k__BackingField: 1.1
   <SpeedScaleAdd>k__BackingField: 0.1
   <AttackSpeedScaleAdd>k__BackingField: 0.1
   <SpawnDepth>k__BackingField: 0
   <SpawnWeight>k__BackingField: 0
-  <EnemyObject>k__BackingField: {fileID: 1838291120267913368, guid: 3846358b5d7bd8c4f8691d6d50bc74ef, type: 3}
+  <EnemyObject>k__BackingField: {fileID: 1838291120267913368, guid: 3f088dd11f5461542ab3175e06926a44, type: 3}
