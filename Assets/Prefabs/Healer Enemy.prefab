@@ -136,6 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b755fe4f7395341b8e4f8c26d73b6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealerEnemy
+  damageNumberPrefab: {fileID: 6584957645631030996, guid: 0ae18cabce949c74cb90402e393d4624, type: 3}
+  healNumberPrefab: {fileID: 6584957645631030996, guid: 484ed9ecbeba42943a9388eab939ee9b, type: 3}
   spriteRenderer: {fileID: 4256143980246744868}
   healRadius: 3
   xDisplacementRange: 10
@@ -172,7 +174,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6120853930442637271}

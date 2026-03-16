@@ -8,7 +8,6 @@ public class MeleeEnemy : BaseEnemy
     {
         base.Initialize(data, targetPos);
         targetPosition = targetPos;
-        Debug.Log(targetPos);
     }
 
     //stoping is already taken care of by default by BaseEnemy

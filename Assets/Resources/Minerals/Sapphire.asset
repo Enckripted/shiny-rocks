@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 970c35d3dbb9dcb4cb3ba47bec7b9f60, type: 3}
-  m_Name: Diamond
+  m_Name: Sapphire
   m_EditorClassIdentifier: Assembly-CSharp::MineralData
-  Name: DIamond
-  SellValue: 10
-  MinimumDepth: 10
-  MaxHealth: 10
-  Color: {r: 0.36040404, g: 0.8396226, b: 0.73255026, a: 1}
+  Name: Emerald
+  SellValue: 2
+  MinimumDepth: 0
+  MaxHealth: 2
+  Color: {r: 0.046563257, g: 0.6226415, b: 0.008810949, a: 1}
   Sprite: {fileID: 0}

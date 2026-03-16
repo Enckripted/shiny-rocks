@@ -83,11 +83,14 @@ public class EnemySpawnManager : MonoBehaviour
         return null; //should throw an error if this happens
     }
 
-    private void AttemptSpawnEnemy()
+    private void AttemptSpawnEnemy(int attempt)
     {
+        if (attempt == 5)
+            return;
         Vector3 spawnPos = GetRandEnemySpawnPos();
         if (numOfEnemies >= maxEnemiesAtOnce || !IsPosValidSpawnPos(spawnPos))
         {
+            AttemptSpawnEnemy(attempt + 1);
             return;
         }
 
@@ -108,6 +111,11 @@ public class EnemySpawnManager : MonoBehaviour
         StartCoroutine(SpawnLoop());
     }
 
+    void Update()
+    {
+
+    }
+
     private IEnumerator SpawnLoop()
     {
         while (true)
@@ -118,7 +126,7 @@ public class EnemySpawnManager : MonoBehaviour
                 continue;
             }
 
-            AttemptSpawnEnemy();
+            AttemptSpawnEnemy(0);
             yield return new WaitForSeconds(spawnInterval);
         }
     }

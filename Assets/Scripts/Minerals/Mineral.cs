@@ -31,7 +31,8 @@ public class Mineral : MonoBehaviour
         mineralSpriteRenderer.color = new(0, 0, 0, 0);
         healthBarObj.SetActive(false);
         hitEffect.Play();
-        GameManager.instance.AddMineral(MineralName, 1);
+        //so bad
+        GameManager.instance.AddMineral(MineralName, PlayerDrill.instance.ShouldDoubleOreYield ? 2 : 1);
         //source.clip = clip;
         //source.Play();
         StartCoroutine(MineralRemovalDelay());

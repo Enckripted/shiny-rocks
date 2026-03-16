@@ -2108,7 +2108,7 @@ GameObject:
   - component: {fileID: 680401818}
   - component: {fileID: 680401820}
   m_Layer: 5
-  m_Name: AbilitySubPanel3
+  m_Name: AbilitySubPanel4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2226,7 +2226,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: AbilitySubPanel3
+          m_StringArgument: AbilitySubPanel4
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &687492249
@@ -3147,7 +3147,7 @@ GameObject:
   - component: {fileID: 890170468}
   - component: {fileID: 890170470}
   m_Layer: 5
-  m_Name: AbilitySubPanel4
+  m_Name: AbilitySubPanel3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3265,7 +3265,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: AbilitySubPanel4
+          m_StringArgument: AbilitySubPanel3
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &890431433
@@ -4464,8 +4464,8 @@ RectTransform:
   m_Children:
   - {fileID: 1587044970}
   - {fileID: 1979662725}
-  - {fileID: 680401817}
   - {fileID: 890170467}
+  - {fileID: 680401817}
   - {fileID: 709878493}
   - {fileID: 864665206}
   m_Father: {fileID: 1218246671}
@@ -5133,7 +5133,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Recharge Time
+  m_text: Weapon Speed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5811,7 +5811,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MineralSpawnManager
   spawner: {fileID: 1338576179}
   gameManager: {fileID: 1964252366}
-  spawnDistance: 1
+  baseSpawnDistance: 1.5
+  spawnDistanceDecrement: 0.1
+  decrementDepthAmount: 10
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  intersectionCheckRadius: 1
 --- !u!4 &1338576181
 Transform:
   m_ObjectHideFlags: 0
