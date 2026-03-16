@@ -11,8 +11,17 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] private GameObject highestSpawnLocation;
     [SerializeField] private GameObject enemyMeleeLocation;
 
-    [SerializeField] private float spawnInterval;
-    [SerializeField] private int maxEnemiesAtOnce;
+    [Header("Base Values")]
+    [SerializeField] private float baseSpawnInterval;
+    [SerializeField] private int baseMaxEnemiesAtOnce;
+
+    [Header("Depth Until Increment")]
+    [SerializeField] private float spawnIntervalDepthIncrement;
+    [SerializeField] private float maxEnemiesDepthIncrement;
+
+    //hardcoded garabge
+    private float spawnInterval => baseSpawnInterval - 0.1f * (PlayerDrill.instance.DrillDepth / spawnIntervalDepthIncrement);
+    private float maxEnemiesAtOnce => baseMaxEnemiesAtOnce + PlayerDrill.instance.DrillDepth / maxEnemiesDepthIncrement;
 
     [SerializeField] private float overlapCheckRadius;
     [SerializeField] private LayerMask overlapLayerMask;

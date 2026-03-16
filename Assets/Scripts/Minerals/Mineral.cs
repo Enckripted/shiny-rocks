@@ -17,6 +17,7 @@ public class Mineral : MonoBehaviour
     [SerializeField] private SpriteRenderer mineralSpriteRenderer;
     [SerializeField] private ParticleSystem hitEffect;
     [SerializeField] private AudioClip clip;
+    [SerializeField] private GameObject healthBarObj;
 
     public void Initialize(MineralData data)
     {
@@ -28,7 +29,7 @@ public class Mineral : MonoBehaviour
     public void DestroyMineral()
     {
         mineralSpriteRenderer.color = new(0, 0, 0, 0);
-        //health.gameObject.SetActive(false);
+        healthBarObj.SetActive(false);
         hitEffect.Play();
         GameManager.instance.AddMineral(MineralName, 1);
         //source.clip = clip;

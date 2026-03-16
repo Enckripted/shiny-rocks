@@ -739,7 +739,7 @@ Transform:
   m_GameObject: {fileID: 140304308}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20, y: -15, z: 0}
+  m_LocalPosition: {x: -25, y: -15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1616,7 +1616,7 @@ Transform:
   m_GameObject: {fileID: 496803132}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -1, w: 0}
-  m_LocalPosition: {x: -20, y: -4, z: 0}
+  m_LocalPosition: {x: -25, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2090,9 +2090,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponCooldownUpgrade
   <Symbol>k__BackingField: Wc
   <Name>k__BackingField: Weapon Cooldown
-  <Description>k__BackingField: 
-  <InitialCost>k__BackingField: 0
-  <CostScale>k__BackingField: 0
+  <Description>k__BackingField: Decreases the time that you need to wait between
+    weapon shots (additive).
+  <InitialCost>k__BackingField: 50
+  <CostScale>k__BackingField: 1.15
   <CooldownReductionPerLevel>k__BackingField: 0.1
 --- !u!1 &680401816
 GameObject:
@@ -2274,10 +2275,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponDamageUpgrade
   <Symbol>k__BackingField: Wd
   <Name>k__BackingField: Weapon Damage
-  <Description>k__BackingField: 
-  <InitialCost>k__BackingField: 0
-  <CostScale>k__BackingField: 0
-  <DamageMultiplierPerLevel>k__BackingField: 1.1
+  <Description>k__BackingField: Multiplier to the damage your weapon deals to moles.
+  <InitialCost>k__BackingField: 20
+  <CostScale>k__BackingField: 1.25
+  <DamageMultiplierPerLevel>k__BackingField: 1.25
 --- !u!1 &709878492
 GameObject:
   m_ObjectHideFlags: 0
@@ -3128,9 +3129,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DrillSpeedUpgrade
   <Symbol>k__BackingField: Ds
   <Name>k__BackingField: Drill Speed
-  <Description>k__BackingField: 
-  <InitialCost>k__BackingField: 0
-  <CostScale>k__BackingField: 0
+  <Description>k__BackingField: Makes the drill move faster while it's not mining
+    minerals.
+  <InitialCost>k__BackingField: 20
+  <CostScale>k__BackingField: 1.15
   <SpeedPerLevel>k__BackingField: 0.5
 --- !u!1 &890170466
 GameObject:
@@ -4237,9 +4239,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DrillDamageUpgrade
   <Symbol>k__BackingField: Dd
   <Name>k__BackingField: Drill Damage
-  <Description>k__BackingField: Decreases the time it takes to mine minerals.
-  <InitialCost>k__BackingField: 0
-  <CostScale>k__BackingField: 1.1
+  <Description>k__BackingField: Multiplier to the damage the drill deals to minerals.
+  <InitialCost>k__BackingField: 10
+  <CostScale>k__BackingField: 1.15
   <DamageMultiplierPerLevel>k__BackingField: 1.15
 --- !u!1 &1091229158
 GameObject:
@@ -4557,9 +4559,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DrillHealthUpgrade
   <Symbol>k__BackingField: Dh
   <Name>k__BackingField: Drill Health
-  <Description>k__BackingField: 'Increase the max health '
-  <InitialCost>k__BackingField: 0
-  <CostScale>k__BackingField: 0
+  <Description>k__BackingField: Increases the max health of the drill (additive).
+  <InitialCost>k__BackingField: 10
+  <CostScale>k__BackingField: 1.15
   <HealthPerLevel>k__BackingField: 50
 --- !u!1 &1154606749
 GameObject:
@@ -4745,8 +4747,10 @@ MonoBehaviour:
   lowestSpawnLocation: {fileID: 140304308}
   highestSpawnLocation: {fileID: 496803132}
   enemyMeleeLocation: {fileID: 2020890882}
-  spawnInterval: 0.5
-  maxEnemiesAtOnce: 2
+  baseSpawnInterval: 2.5
+  baseMaxEnemiesAtOnce: 5
+  spawnIntervalDepthIncrement: 10
+  maxEnemiesDepthIncrement: 10
   overlapCheckRadius: 1
   overlapLayerMask:
     serializedVersion: 2
@@ -7428,9 +7432,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponRadiusUpgrade
   <Symbol>k__BackingField: Wr
   <Name>k__BackingField: Weapon Radius
-  <Description>k__BackingField: 
-  <InitialCost>k__BackingField: 0
-  <CostScale>k__BackingField: 0
+  <Description>k__BackingField: A single click from your weapon now deals damage
+    in a wider area.
+  <InitialCost>k__BackingField: 50
+  <CostScale>k__BackingField: 1.15
   <RadiusPerLevel>k__BackingField: 0.1
 --- !u!1001 &1674374431
 PrefabInstance:
@@ -8752,7 +8757,7 @@ Transform:
   m_GameObject: {fileID: 2020890882}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -1, w: 0}
-  m_LocalPosition: {x: 2, y: -9, z: 0}
+  m_LocalPosition: {x: 1, y: -9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

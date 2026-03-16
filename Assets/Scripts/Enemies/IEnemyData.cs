@@ -15,6 +15,6 @@ public interface IEnemyData
 	public float SpeedScaleAdd { get; }
 	public float AttackSpeedScaleAdd { get; }
 
-	public List<Texture2D> Sprite { get; }
+	public List<Sprite> Sprite { get; }
 	public GameObject EnemyObject { get; }
 }

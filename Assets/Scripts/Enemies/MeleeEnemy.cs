@@ -8,6 +8,7 @@ public class MeleeEnemy : BaseEnemy
     {
         base.Initialize(data, targetPos);
         targetPosition = targetPos;
+        Debug.Log(targetPos);
     }
 
     //stoping is already taken care of by default by BaseEnemy
@@ -18,6 +19,7 @@ public class MeleeEnemy : BaseEnemy
 
     protected override void Attack()
     {
+        Debug.Log("attack");
         GameManager.instance.PlayerDrill.DrillHealth.TakeDamage(Damage);
     }
 }
