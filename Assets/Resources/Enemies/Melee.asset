@@ -18,8 +18,7 @@ MonoBehaviour:
   <Speed>k__BackingField: 3
   <AttackSpeed>k__BackingField: 1
   <Sprite>k__BackingField:
-  - {fileID: -5427164653334127848, guid: 5ca74fbc65a5e8d3aadbc61afbf59a8b, type: 3}
-  - {fileID: 2322061472295505372, guid: 27fee25a478da8917a0bf969301ad309, type: 3}
+  - {fileID: 5025413867890805729, guid: d0d9a6928059c25438c912c82527a9cf, type: 3}
   <HealthScaleMult>k__BackingField: 1.1
   <DamageScaleMult>k__BackingField: 1.1
   <SpeedScaleAdd>k__BackingField: 0.1

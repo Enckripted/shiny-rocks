@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 27fee25a478da8917a0bf969301ad309
+guid: 91d7fe47d1d8dc541bb954dddea385a4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2322061472295505372
-    second: mole3_0
-  - first:
-      213: 3794583869708395198
-    second: mole3_1
+      213: 3992421098685194722
+    second: mole_ranged_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -99,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mole3_0
+      name: mole_ranged_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 131
-        height: 73
+        width: 205
+        height: 161
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,30 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cdd4bc23b9e993020800000000000000
-      internalID: 2322061472295505372
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mole3_1
-      rect:
-        serializedVersion: 2
-        x: 58
-        y: 64
-        width: 13
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: eb26568cce119a430800000000000000
-      internalID: 3794583869708395198
+      spriteID: 2e1e7e426dde76730800000000000000
+      internalID: 3992421098685194722
       vertices: []
       indices: 
       edges: []
@@ -160,8 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      mole3_0: 2322061472295505372
-      mole3_1: 3794583869708395198
+      mole_ranged_0: 3992421098685194722
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

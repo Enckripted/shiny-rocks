@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5ca74fbc65a5e8d3aadbc61afbf59a8b
+guid: ae2bdc81e7480c1408c3912804a521dd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5427164653334127848
-    second: mole_0
+      213: 9161496607214584030
+    second: mole_heal_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mole_0
+      name: mole_heal_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 130
-        height: 93
+        width: 207
+        height: 171
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 81b967c8086dea4b0800000000000000
-      internalID: -5427164653334127848
+      spriteID: ed0c8f3ef9c242f70800000000000000
+      internalID: 9161496607214584030
       vertices: []
       indices: 
       edges: []
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      mole_0: -5427164653334127848
+      mole_heal_0: 9161496607214584030
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 52293900555e2e3c2be675b1bb8b3fb9
+guid: d0d9a6928059c25438c912c82527a9cf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5092438333008127915
-    second: mole2_0
+      213: 5025413867890805729
+    second: mole_melee_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mole2_0
+      name: mole_melee_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 127
-        height: 83
+        width: 211
+        height: 171
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ba72887dea9fba640800000000000000
-      internalID: 5092438333008127915
+      spriteID: 1eb04fc794bddb540800000000000000
+      internalID: 5025413867890805729
       vertices: []
       indices: 
       edges: []
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      mole2_0: 5092438333008127915
+      mole_melee_0: 5025413867890805729
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
