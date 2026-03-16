@@ -28,7 +28,7 @@ public abstract class BaseEnemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public virtual void Initialize(EnemyData data)
+    public virtual void Initialize(EnemyData data, Vector3 targetPosition)
     {
         float scaleLevel = (float)Math.Floor(GameManager.instance.PlayerDrill.DrillDepth / 10);
         float maxHealth = data.MaxHealth * (float)Math.Pow(data.HealthScaleMult, scaleLevel);
