@@ -19,7 +19,7 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private GameObject buttonPanel;
     [SerializeField] private GameObject[] abilityButtons;
     [SerializeField] private double[] abilityCooldownTimers; //stores cooldown timer of button
-    private bool[] isAbilityReady = new bool[6];
+    [SerializeField] private bool[] isAbilityReady = new bool[6];
     Dictionary<string, double> cooldownDict = new Dictionary<string, double>() {
         //stores cooldown times for abilities, uses ability name as key
         //timer values are placeholders for now. add ability upgrading later?
@@ -157,10 +157,12 @@ public class PlayerDrill : MonoBehaviour
                 {
                     abilityCooldownTimers[i] -= Time.deltaTime;
                     abilityButtons[i].GetComponent<Button>().interactable = false;
+                    isAbilityReady[i] = false;
                 }
                 else
                 {
                     abilityButtons[i].GetComponent<Button>().interactable = true;
+                    isAbilityReady[i] = true;
                 }
             }
         }
