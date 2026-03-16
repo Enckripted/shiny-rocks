@@ -128,6 +128,7 @@ MonoBehaviour:
   mineralSpriteRenderer: {fileID: 4256143980246744868}
   hitEffect: {fileID: 7685837812495177004}
   clip: {fileID: 8300000, guid: fe3fa7cfd5f463945bfcad7ed1ef2fc2, type: 3}
+  healthBarObj: {fileID: 1017503693413197816}
 --- !u!61 &2469639109035000643
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -549,6 +550,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca6858296d1d47d4ba8052535b27ad89, type: 3}
+--- !u!1 &1017503693413197816 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6943961867042321884, guid: ca6858296d1d47d4ba8052535b27ad89, type: 3}
+  m_PrefabInstance: {fileID: 7945210320335720996}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7459333791298876343 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 704793821091668371, guid: ca6858296d1d47d4ba8052535b27ad89, type: 3}

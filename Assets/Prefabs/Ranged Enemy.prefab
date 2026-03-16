@@ -45,7 +45,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1838291120267913368}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -139,7 +139,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 4256143980246744868}
   bulletPrefab: {fileID: 1154424331638651049, guid: 59b313cdacbfb4541af7290da82f0817, type: 3}
   bulletSpeed: 40
-  distanceFromDrill: 10
+  distanceFromDrillBase: 5
+  distanceFromDrillRange: 2
 --- !u!1 &6375544225021976078
 GameObject:
   m_ObjectHideFlags: 0

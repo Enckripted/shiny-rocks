@@ -37,6 +37,8 @@ public abstract class BaseEnemy : MonoBehaviour
         Speed = data.Speed + data.SpeedScaleAdd * scaleLevel;
         Damage = data.Damage + (float)Math.Pow(data.DamageScaleMult, scaleLevel);
         AttackSpeed = data.AttackSpeed - data.AttackSpeedScaleAdd * scaleLevel;
+
+        spriteRenderer.sprite = data.Sprite[UnityEngine.Random.Range(0, data.Sprite.Count)];
     }
 
     protected abstract bool ReadyToAttack();
