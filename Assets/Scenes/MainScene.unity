@@ -1367,6 +1367,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5080446556822409914, guid: 19ceb046e8227754982be750e677735d, type: 3}
+      propertyPath: abilityActiveTimers.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080446556822409914, guid: 19ceb046e8227754982be750e677735d, type: 3}
       propertyPath: abilityCooldownTimers.Array.size
       value: 6
       objectReference: {fileID: 0}
